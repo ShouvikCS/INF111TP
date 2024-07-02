@@ -1,0 +1,35 @@
+Questions
+------------
+
+Est-un animal: 
+Est-ce qu'il aboie: 
+Est-ce un moyen de transport: 
+Est-ce que cela vole: 
+Est-ce qu'il chante: 
+Est-ce un animal marin: 
+Est-ce dangeureux: 
+Est-ce en rapport avec un immeuble: 
+Est-ce une excellente université: 
+Est-ce préhistorique: 
+Est-ce un animal de ferme: 
+Est-ce un animal sauvage: 
+Est-ce que cela piaille: 
+Est-ce le roi des animaux: 
+
+Réponses
+------------
+
+chat  ONNNNNN
+chien  OO
+voiture  NON
+avion  NOO
+perruche  ONO
+dauphin  ONNON
+requin  ONNOO
+maison  NNON
+école de technologie supérieure  NNOO
+dinausore  ONNNON
+tyranosaure  ONNNOO
+cochon  ONNNNON
+tigre  ONNNNNON
+poule  ONNNNOO
