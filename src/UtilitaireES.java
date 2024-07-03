@@ -103,7 +103,7 @@ public class UtilitaireES {
         if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
 
             reponse = JOptionPane.showConfirmDialog(null,
-                    "La r�ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+                    "La reponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
             if(reponse != JOptionPane.CANCEL_OPTION &&
@@ -113,7 +113,7 @@ public class UtilitaireES {
                 if (reponse == 0){
 
                     JOptionPane.showMessageDialog(null,
-                            "Bravo nous avons trouve votre r�ponse");
+                            "Bravo nous avons trouve votre reponse");
                 }
 
                 // Autrement, on demande quel est sa r�ponse.

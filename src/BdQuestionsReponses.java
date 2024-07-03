@@ -1,25 +1,34 @@
 import java.util.ArrayList;
 import java.util.List;
 public class BdQuestionsReponses {
-    public static List<String> questions = new ArrayList<>();
-    public static List<String> reponses = new ArrayList<>();
+    public static List<String> questions;
+    public static List<Reponse> reponses;
     public static InfoJeu infoJeu;
+    private Noeud noeudPremier;
+
+    public BdQuestionsReponses() {
+        noeudPremier = null;
+        infoJeu = new InfoJeu(noeudPremier);
+        questions = new ArrayList<>();
+        reponses = new ArrayList<>();
+    }
 
     public static int ajouterQuestion(String question) {
         questions.add(question);
         return questions.size()-1;
     }
-    public static int ajouterReponse(String reponse) {
+    public static int ajouterReponse(Reponse reponse) {
         reponses.add(reponse);
         return reponses.size()-1;
     }
 
 
     public boolean estVide() {
-        return questions.equals("");
+        return questions.equals("test");
     }
 
     public void choisirPremiereQuestion() {
+
     }
 
     public boolean reponseTrouvee() {
@@ -27,7 +36,7 @@ public class BdQuestionsReponses {
     }
 
     public String getLaChaineActuelle() {
-        return reponses;
+        return String.valueOf(reponses);
     }
 
     public boolean deplacerDansArbre(int reponse) {

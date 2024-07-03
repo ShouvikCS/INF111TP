@@ -13,5 +13,4 @@ public class Constantes {
     // Nom de fichier par d�faut pour retenir la bd.
     public static final String NOM_FICHIER_BD = "bd.bin";
 
-
 }

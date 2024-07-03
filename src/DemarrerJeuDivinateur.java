@@ -22,7 +22,7 @@ public class DemarrerJeuDivinateur {
      * cr�� et maintenu � jour � chaque nouvelle r�ponse qui s'ajoute dans le
      * jeu.
      *
-     * @author Pierre B�lisle
+     * @author Pierre Belisle
      * @version janvier 2017
      */
 
@@ -30,9 +30,9 @@ public class DemarrerJeuDivinateur {
     public static void main(String[] args) {
 
         /*
-         * Strat�gie : Une classe BdQuestionsReponse retient les questions,
-         * les r�ponses et le chemin pour les retrouver.  La classe JOptionPane
-         * est utilis�e pour les ES ainsi que le module UtilitaireES.
+         * Strategie : Une classe BdQuestionsReponse retient les questions,
+         * les reponses et le chemin pour les retrouver.  La classe JOptionPane
+         * est utilisee pour les ES ainsi que le module UtilitaireES.
          *
          * La boucle "principale" du jeu est d�finie localement, les autres sont
          * dans l'utilitaireES.
@@ -43,11 +43,11 @@ public class DemarrerJeuDivinateur {
         cadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
         cadre.setVisible(true);
 
-        // La bd qui contient les r�ponses, leur question
+        // La bd qui contient les reponses, leur question
         // et les liens entre elles.
         BdQuestionsReponses bd = UtilitaireFichier.obtenirBd();
 
-        // Sert � saisir la reponse de l'utilisateur aux questions.
+        // Sert a saisir la reponse de l'utilisateur aux questions.
         int reponse = 0;
 
         // Lorsquel le jeu fonctionne, enlever le commentaire pour
@@ -56,7 +56,7 @@ public class DemarrerJeuDivinateur {
 
         //  Si la bd est vide, on demande simplement un objet ou un animal et
         // au moins une question qui le distingue.  Autrement dit, on s'assure
-        // d'avoir au moins une r�ponse dans la bd avant de jouer.
+        // d'avoir au moins une reponse dans la bd avant de jouer.
         if (bd.estVide()) {
 
             UtilitaireES.demanderReponseValide(bd);
@@ -79,14 +79,14 @@ public class DemarrerJeuDivinateur {
                             "Voulez-vous rejouez  ?");
         }
 
-        // On sort de la boucle c'est que la partie est termin�e.
+        // On sort de la boucle c'est que la partie est terminee.
 
 
         // Lorsquel le jeu fonctionne, enlever le commentaire pour
         // dans la version officielle.
-        //JOptionPane.showMessageDialog(null, "Merci d'avoir jou� avec nous!");
+        //JOptionPane.showMessageDialog(null, "Merci d'avoir jouer avec nous!");
 
-        // Fermeture de la fen�tre en arri�re.
+        // Fermeture de la fenetre en arriere.
         cadre.dispose();
     }
 
