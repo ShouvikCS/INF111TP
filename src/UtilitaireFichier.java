@@ -58,7 +58,7 @@ public class UtilitaireFichier {
     }
 
     /**
-     * Sauvegarde la bd dans le fichier nomm� par NOM_FICHIER_BD.
+     * Sauvegarde la bd dans le fichier nommé par NOM_FICHIER_BD.
      *
      */
     public static void sauvegarde(BdQuestionsReponses bd, String nomFic){

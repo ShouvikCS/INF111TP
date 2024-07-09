@@ -103,7 +103,7 @@ public class UtilitaireES {
         if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
 
             reponse = JOptionPane.showConfirmDialog(null,
-                    "La reponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+                    "La réponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
             if(reponse != JOptionPane.CANCEL_OPTION &&
@@ -135,6 +135,15 @@ public class UtilitaireES {
     }
 
     public static void demanderReponseValide(BdQuestionsReponses bd) {
+        String answer = JOptionPane.showInputDialog(null, "Je ne connais rien. À quoi pensiez vous?");
+
+
+        bd.ajouterReponse(new Reponse((answer)));
+
+//        String question = JOptionPane.showInputDialog(null, "Ajouter une question");
+        //bd.ajouterQuestion(question);
+
+        UtilitaireFichier.sauvegarde(bd, "bd.bin");
     }
 
 }

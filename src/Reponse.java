@@ -3,15 +3,18 @@ import java.util.List;
 
 public class Reponse {
     private String reponse;
-    private List<String> indices;
+    private List<Integer> indices;
 
     public Reponse(String reponse) {
         this.reponse = reponse;
         this.indices = new ArrayList<>();
     }
 
-    public void addIndices(String indice) {
+    public void addIndices(Integer indice) {
         this.indices.add(indice);
     }
 
+    public String toString(){
+        return reponse;
+    }
 }
