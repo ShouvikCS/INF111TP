@@ -67,11 +67,11 @@ public class UtilitaireES {
         // Choisir une premi?re question dans la bd.
         bd.choisirPremiereQuestion();
 
-        // Tant  qu'on a pas trouv? la r?ponse et qu'il reste des questions et
+        // Tant  qu'on a pas trouvé la réponse et qu'il reste des questions et
         // que l'utilisateur n'appuie pas sur X.
-        while(reponse != JOptionPane.CLOSED_OPTION &&
-                !bd.reponseTrouvee() &&
-                resteQuestion){
+        while(reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
+                !bd.reponseTrouvee() && // and the 2 references left and right are not null
+                resteQuestion){ // s'il reste des question.
 
             String [] options =  {"Oui", "Non"};
 
@@ -79,10 +79,7 @@ public class UtilitaireES {
 
             // On pose la question courante dans l'arbre de connaissance de la bd.
             reponse  = JOptionPane.showOptionDialog(null,
-                    str +
-
-                            // On met un ? s'il n'y en a pas
-                            ((str.charAt(str.length() -1) == '?')? " " : "?"),
+                    str + ((str.charAt(str.length() -1) == '?')? " " : "?"),
                     "Jeu du divinateur",
                     JOptionPane.CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
@@ -135,14 +132,18 @@ public class UtilitaireES {
     }
 
     public static void demanderReponseValide(BdQuestionsReponses bd) {
-        String answer = JOptionPane.showInputDialog(null, "Je ne connais rien. À quoi pensiez vous?");
-
-
-        bd.ajouterReponse(new Reponse((answer)));
-
-//        String question = JOptionPane.showInputDialog(null, "Ajouter une question");
-        //bd.ajouterQuestion(question);
-
+        String reponse = JOptionPane.showInputDialog(null, "Je ne connais rien. Entrez ce à quoi vous pensiez?");
+        if (!bd.estVide()){
+            String question = JOptionPane.showInputDialog(null, "Ajouter une question ");
+            bd.ajouterQuestionReponse(question, reponse);
+            return;
+        }
+        if (bd.reponseExiste(reponse)){
+            JOptionPane.showInputDialog(null, "la reponse existe déjà");
+        } else {
+            String question = JOptionPane.showInputDialog(null, "Ajouter une question ");
+            bd.ajouterQuestionReponse(question, reponse);
+        }
         UtilitaireFichier.sauvegarde(bd, "bd.bin");
     }
 

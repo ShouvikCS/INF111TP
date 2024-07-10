@@ -1,20 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Reponse {
+public class Reponse implements Serializable {
     private String reponse;
-    private List<Integer> indices;
+    private Liste indices;
 
     public Reponse(String reponse) {
         this.reponse = reponse;
-        this.indices = new ArrayList<>();
+        this.indices = new Liste();
     }
 
     public void addIndices(Integer indice) {
-        this.indices.add(indice);
+        this.indices.enfiler(indice);
     }
 
     public String toString(){
         return reponse;
+    }
+
+    public String getReponse() {
+        return reponse;
+    }
+
+    public Liste getIndices() {
+        return indices;
     }
 }

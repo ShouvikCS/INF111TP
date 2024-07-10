@@ -1,9 +1,10 @@
-public class InfoJeu {
+import java.io.Serializable;
+public class InfoJeu implements Serializable {
     Noeud premier, courant, precedent;
     boolean dernierQuestionPositive;
-    public InfoJeu (Noeud premier){
-        this.premier = premier;
-        this.courant = premier;
+    public InfoJeu (){
+        this.premier = null;
+        this.courant = null;
         this.precedent = null;
         this.dernierQuestionPositive = false;
     }

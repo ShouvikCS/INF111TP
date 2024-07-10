@@ -1,4 +1,5 @@
-public class Noeud {
+import java.io.Serializable;
+public class Noeud implements Serializable {
     private int index;
     private Noeud gauche, droite;
     public Noeud(int index) {
