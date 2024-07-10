@@ -3,10 +3,10 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
- * Classe implï¿½mentant des sous programmes utilitaires
+ * Classe impl?mentant des sous programmes utilitaires
  * qui permettent de faire de la saisie au clavier pour le jeu du divinateur.
  *
- * Toutes les fonctionnalitï¿½s importantes sont effectuï¿½es par la classe 
+ * Toutes les fonctionnalit?s importantes sont effectu?es par la classe 
  * BdQuestionsReponses.
  *
  * @author pbelisle
@@ -20,7 +20,7 @@ public class UtilitaireES {
     /**********************************
      * AFFICHER PRESENTATION DU JEU
      *
-     * Affiche un boï¿½te de message qui explique le jeu.
+     * Affiche un boîte de message qui explique le jeu.
      *
      **********************************/
     public static void afficherPresentationJeu(){
@@ -30,15 +30,15 @@ public class UtilitaireES {
                 "***********JEU DU DIVINATEURS*******\n" +
                 "***************************************\n" +
                 "***************************************\n" +
-                "Il s'agit de penser ï¿½ un animal, un objet ou un \n" +
+                "Il s'agit de penser à un animal, un objet ou un \n" +
                 "personnage et nous tentons de le trouver \n" +
                 "en posant des questions auxquelles \n" +
-                "vous devrez rï¿½pondre par  oui ou par non.\n\n\n" +
-                "Si nous ne trouvons pas, vous pourrez nous dire ce ï¿½ \n" +
+                "vous devrez répondre par  oui ou par non.\n\n\n" +
+                "Si nous ne trouvons pas, vous pourrez nous dire ce à \n" +
                 "quoi vous pensiez et ajouter une question qui distingue\n" +
-                "votre rï¿½ponse des autres.\n\n\n" +
-                "Des mauvaises questions peuvent dï¿½ranger" +
-                " le bon dï¿½roulement du jeu." +
+                "votre réponse des autres.\n\n\n" +
+                "Des mauvaises questions peuvent d?ranger" +
+                " le bon déroulement du jeu." +
                 "\n" +
                 "************************************";
 
@@ -53,21 +53,21 @@ public class UtilitaireES {
      * DEMARRER DIVINATEUR
      *************************
      *Permet l'interaction avec l'utilisateur en
-     *posant les questions provenant de la base de donnï¿½es des rï¿½ponses et
-     *en agissant selon lles indices donnï¿½s par l'utilisateur.
+     *posant les questions provenant de la base de donn?es des r?ponses et
+     *en agissant selon lles indices donn?s par l'utilisateur.
      */
     public static void demarrerDivinateur(BdQuestionsReponses bd){
 
         // Sert a retenir s'il reste des question.
         boolean resteQuestion = true;
 
-        // Sert ï¿½ saisir la rï¿½ponse de l'utilisateur.
+        // Sert ? saisir la r?ponse de l'utilisateur.
         int reponse = JOptionPane.OK_OPTION;
 
-        // Choisir une premiï¿½re question dans la bd.
+        // Choisir une premi?re question dans la bd.
         bd.choisirPremiereQuestion();
 
-        // Tant  qu'on a pas trouvï¿½ la rï¿½ponse et qu'il reste des questions et
+        // Tant  qu'on a pas trouv? la r?ponse et qu'il reste des questions et
         // que l'utilisateur n'appuie pas sur X.
         while(reponse != JOptionPane.CLOSED_OPTION &&
                 !bd.reponseTrouvee() &&
@@ -92,31 +92,31 @@ public class UtilitaireES {
 
             if(reponse != JOptionPane.CLOSED_OPTION){
 
-                // On se promï¿½ne dans l'arbre de connaissances.
+                // On se prom?ne dans l'arbre de connaissances.
                 resteQuestion = bd.deplacerDansArbre(reponse);
             }
         }
 
-        // Si on est sorti de la boucle prï¿½cï¿½dente c'est qu'il ne reste plus de
-        // question ou qu'on a trouvï¿½.  Donc s'il reste des questions c'est
-        // qu'on a trouvï¿½
+        // Si on est sorti de la boucle pr?c?dente c'est qu'il ne reste plus de
+        // question ou qu'on a trouv?.  Donc s'il reste des questions c'est
+        // qu'on a trouv?
         if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
 
             reponse = JOptionPane.showConfirmDialog(null,
-                    "La rÃ©ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+                    "La réponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
             if(reponse != JOptionPane.CANCEL_OPTION &&
                     reponse != JOptionPane.CLOSED_OPTION){
 
-                // Si c'est oui, on a trouvï¿½, bravo!
+                // Si c'est oui, on a trouv?, bravo!
                 if (reponse == 0){
 
                     JOptionPane.showMessageDialog(null,
-                            "Bravo nous avons trouve votre reponse");
+                            "Bravo nous avons trouvé votre reponse");
                 }
 
-                // Autrement, on demande quel est sa rï¿½ponse.
+                // Autrement, on demande quel est sa r?ponse.
                 else{
 
                     demanderReponseValide(bd);
@@ -129,13 +129,13 @@ public class UtilitaireES {
         else if(reponse != JOptionPane.CANCEL_OPTION &&
                 reponse != JOptionPane.CLOSED_OPTION){
 
-            // On demande quel est sa rï¿½ponse.
+            // On demande quel est sa r?ponse.
             demanderReponseValide(bd);
         }
     }
 
     public static void demanderReponseValide(BdQuestionsReponses bd) {
-        String answer = JOptionPane.showInputDialog(null, "Je ne connais rien. Ã€ quoi pensiez vous?");
+        String answer = JOptionPane.showInputDialog(null, "Je ne connais rien. À quoi pensiez vous?");
 
 
         bd.ajouterReponse(new Reponse((answer)));

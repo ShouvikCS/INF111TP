@@ -9,17 +9,17 @@ public class DemarrerJeuDivinateur {
 
     /**
      * Il s'agit pour ce travail de la simulation d' un jeu d'intelligence
-     * artificielle . Ce jeu consiste � demander � son utilisateur de penser �
-     * un animal ou � un objet ou un personnage, et le programme tente de le
-     *trouver en lui posant des questions.  L'utilisateur ne doit  r�pondre que 
+     * artificielle . Ce jeu consiste ? demander ? son utilisateur de penser ?
+     * un animal ou ? un objet ou un personnage, et le programme tente de le
+     *trouver en lui posant des questions.  L'utilisateur ne doit  r?pondre que 
      *par :  oui, non.
      *
-     * � noter : Le constructeur de la classe BdQuestionsReponses tente
-     * d'ouvrir un fichier au nom d�fini dans Constantes.NOM_FICHIER_BD.
-     * S'il existe, il contient toutes les donn�es du jeu.  Dans le cas contraire,
-     * la bd est vide alors le programme principal saisit une r�ponse et au
-     * moins une question pour  l'ajouter � la bd.  C'est alors que ce fichier est
-     * cr�� et maintenu � jour � chaque nouvelle r�ponse qui s'ajoute dans le
+     * ? noter : Le constructeur de la classe BdQuestionsReponses tente
+     * d'ouvrir un fichier au nom d?fini dans Constantes.NOM_FICHIER_BD.
+     * S'il existe, il contient toutes les donn?es du jeu.  Dans le cas contraire,
+     * la bd est vide alors le programme principal saisit une r?ponse et au
+     * moins une question pour  l'ajouter ? la bd.  C'est alors que ce fichier est
+     * cr?? et maintenu ? jour ? chaque nouvelle r?ponse qui s'ajoute dans le
      * jeu.
      *
      * @author Pierre Belisle
@@ -34,11 +34,11 @@ public class DemarrerJeuDivinateur {
          * les reponses et le chemin pour les retrouver.  La classe JOptionPane
          * est utilisee pour les ES ainsi que le module UtilitaireES.
          *
-         * La boucle "principale" du jeu est d�finie localement, les autres sont
+         * La boucle "principale" du jeu est d?finie localement, les autres sont
          * dans l'utilitaireES.
          */
 
-        // Pour avoir une fen�tre en fond d'�cran.
+        // Pour avoir une fen?tre en fond d'?cran.
         JFrame cadre = new JFrame();
         cadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
         cadre.setVisible(true);
@@ -61,16 +61,16 @@ public class DemarrerJeuDivinateur {
 
             UtilitaireES.demanderReponseValide(bd);
 
-            // On demande si l'utilisateur veut jouer imm�diatement.
+            // On demande si l'utilisateur veut jouer imm?diatement.
             reponse =
                     JOptionPane.showConfirmDialog(null,
                             "Voulez-vous jouez maintenant ?");
         }
 
-        // Tant que l'utilisateur veut jouer (il n'a pas annul�)
+        // Tant que l'utilisateur veut jouer (il n'a pas annul?)
         while(reponse == JOptionPane.OK_OPTION){
 
-            // On d�marre la partie.
+            // On d?marre la partie.
             UtilitaireES.demarrerDivinateur(bd);
 
             // On demande s'il veut rejouer.

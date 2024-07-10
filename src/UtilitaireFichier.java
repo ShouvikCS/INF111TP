@@ -20,8 +20,8 @@ public class UtilitaireFichier {
     public static BdQuestionsReponses obtenirBd(){
 
         /*
-         * Stratï¿½gie : On utilise  un FileInputStream qui permet de lire
-         * la bd d'un coup, (comme elle a ï¿½tï¿½ sauvegardï¿½e).
+         * Strat?gie : On utilise  un FileInputStream qui permet de lire
+         * la bd d'un coup, (comme elle a ?t? sauvegard?e).
          */
         FileInputStream fic;
         BdQuestionsReponses bd = null;
@@ -40,12 +40,12 @@ public class UtilitaireFichier {
 
         }
 
-        // Si le fichier n'existe pas, on s'assure que tout est initialisï¿½.
+        // Si le fichier n'existe pas, on s'assure que tout est initialis?.
         catch(FileNotFoundException e){
             bd = new BdQuestionsReponses();
         }
 
-        // Problï¿½me lors de la lecture.  On arï¿½te.
+        // Probl?me lors de la lecture.  On ar?te.
         catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -58,13 +58,13 @@ public class UtilitaireFichier {
     }
 
     /**
-     * Sauvegarde la bd dans le fichier nommÃ© par NOM_FICHIER_BD.
+     * Sauvegarde la bd dans le fichier nommé par NOM_FICHIER_BD.
      *
      */
     public static void sauvegarde(BdQuestionsReponses bd, String nomFic){
 
         /*
-         * Stratï¿½gie : On utilise  un FileOutputStream qui permet de lire
+         * Strat?gie : On utilise  un FileOutputStream qui permet de lire
          * la bd d'un coup.
          */
         FileOutputStream fic;
@@ -72,10 +72,10 @@ public class UtilitaireFichier {
 
         try {
 
-            //Crï¿½e le fichier
+            //Cr?e le fichier
             fic = new FileOutputStream(nomFic);
 
-            //Ouverture du tampon d'ï¿½criture
+            //Ouverture du tampon d'?criture
             tampon = new ObjectOutputStream(fic);
             tampon.writeObject(bd);
             tampon.close();
@@ -84,10 +84,10 @@ public class UtilitaireFichier {
 
             e1.printStackTrace();
 
-            // Une erreur de lecture, on dï¿½truit le fichier.
+            // Une erreur de lecture, on d?truit le fichier.
         } catch (IOException e) {
 
-            // On obtient le chemin du fichier pour le dï¿½truire.
+            // On obtient le chemin du fichier pour le d?truire.
             Path path =
                     FileSystems.getDefault().getPath(Constantes.NOM_FICHIER_BD);
 

@@ -5,6 +5,7 @@ public class Noeud {
         this.index = index;
         this.gauche = null;
         this.droite = null;
+        //comment
     }
     public int getIndex() {
         return index;
