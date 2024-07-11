@@ -1,12 +1,12 @@
 import java.io.Serializable;
 public class InfoJeu implements Serializable {
-    Noeud premier, courant, precedent;
-    boolean dernierQuestionPositive;
+    private Noeud premier, courant, precedent;
+    boolean derniereQuestionPositive;
     public InfoJeu (){
         this.premier = null;
         this.courant = null;
         this.precedent = null;
-        this.dernierQuestionPositive = false;
+        this.derniereQuestionPositive = false;
     }
     public Noeud getPremier() {
         return premier;
@@ -18,6 +18,7 @@ public class InfoJeu implements Serializable {
         return courant;
     }
     public void setCourant(Noeud courant) {
+        this.precedent = this.courant;
         this.courant = courant;
     }
     public Noeud getPrecedent() {
@@ -27,11 +28,11 @@ public class InfoJeu implements Serializable {
         this.precedent = precedent;
     }
 
-    public boolean isDernierQuestionPositive() {
-        return dernierQuestionPositive;
+    public boolean isDerniereQuestionPositive() {
+        return derniereQuestionPositive;
     }
-    public void setDernierQuestionPositive(boolean dernierQuestionPositive) {
-        this.dernierQuestionPositive = dernierQuestionPositive;
+    public void setDerniereQuestionPositive(boolean derniereQuestionPositive) {
+        this.derniereQuestionPositive = derniereQuestionPositive;
     }
 
 }

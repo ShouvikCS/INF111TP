@@ -16,14 +16,25 @@ public class BdQuestionsReponses implements Serializable {
     }
 
     public void ajouterQuestionReponse(String question, String reponse) {
+
+
         this.questions.add(question);
         this.reponses[this.nbReponses] = new Reponse(reponse);
-//        Reponse rep = new Reponse(reponse);
         Noeud ques = new Noeud(this.questions.size()-1);
         Noeud reps = new Noeud(nbReponses);
+        ques.setGauche(reps);// ? uncertain , when do you set the right reference then?
+        if (estVide()) {
+            this.infoJeu.setPremier(ques);
+            this.infoJeu.setCourant(ques);
+        } else if (){
+            this.infoJeu.getCourant().setDroite(ques);
+            this.infoJeu.getCourant().getDroite().setGauche(reps);
+        } else if (){
+
+        }
+
         nbReponses++;
-        ques.setGauche(reps); // ? uncertain , when do you set the right reference then?
-//        this.infoJeu.courant = this.infoJeu.premier = ques;
+
     }
     // Verifie si la reponse existe dans tableau de reponse
     public boolean reponseExiste(String reponse) {
@@ -43,12 +54,9 @@ public class BdQuestionsReponses implements Serializable {
     }
 
     public void choisirPremiereQuestion() {
-//        Noeud ques = new Noeud(this.questions.size()-1);
-//        Noeud reps = new Noeud(nbReponses);
-
-        infoJeu.courant = infoJeu.premier;
-        infoJeu.dernierQuestionPositive = false;
-        infoJeu.precedent = null;
+        infoJeu.setCourant(infoJeu.getPremier());
+        infoJeu.derniereQuestionPositive = false;
+        infoJeu.setPrecedent(null);
 
 
         //Cette procédure place la référence nœud courant
@@ -62,17 +70,17 @@ public class BdQuestionsReponses implements Serializable {
 
     public boolean reponseTrouvee() {
 
-        return infoJeu.courant.getDroite() == null && infoJeu.courant.getGauche() == null;
+        return infoJeu.getCourant().getDroite() == null && infoJeu.getCourant().getGauche() == null;
         // return true if the 2 references in current noeud are null
     }
 
     public String getLaChaineActuelle() {
-        if (infoJeu.courant.getDroite() == null && infoJeu.courant.getGauche() == null) {
+        if (infoJeu.getCourant().getDroite() == null && infoJeu.getCourant().getGauche() == null) {
 
-            return reponses[infoJeu.courant.getIndex()].getReponse();
+            return reponses[infoJeu.getCourant().getIndex()].getReponse();
 
         } else {
-            return questions.get(infoJeu.courant.getIndex());
+            return questions.get(infoJeu.getCourant().getIndex());
         }
         // Retourne la chaîne associée au nœud courant. Il faut
         // prendre l’indice et l’utiliser dans la bonne collection selon que c’est une question ou
@@ -80,8 +88,22 @@ public class BdQuestionsReponses implements Serializable {
     }
 
     public boolean deplacerDansArbre(int reponse) {
+        System.out.println(reponse); // Oui = 0; Non = 1
+        if (reponse == 0) {
+            infoJeu.setDerniereQuestionPositive(true);
+            infoJeu.setCourant(infoJeu.getCourant().getGauche());
 
-        return false; // temporary test value
+            return true;
+        } else {
+            infoJeu.setDerniereQuestionPositive(false);
+            if (infoJeu.getCourant().getDroite() == null) {
+                return false;
+            } else {
+                infoJeu.setCourant(infoJeu.getCourant().getDroite());
+
+                return true;
+            }
+        }
 
         //Cette procédure reçoit l’indice de l’utilisateur (O ou
         //N), déplace les références de l’attribut de type InfoJeu, ajuste l’attribut booléen

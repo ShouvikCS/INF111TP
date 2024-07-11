@@ -136,6 +136,7 @@ public class UtilitaireES {
         if (!bd.estVide()){
             String question = JOptionPane.showInputDialog(null, "Ajouter une question ");
             bd.ajouterQuestionReponse(question, reponse);
+            UtilitaireFichier.sauvegarde(bd, "bd.bin");
             return;
         }
         if (bd.reponseExiste(reponse)){
