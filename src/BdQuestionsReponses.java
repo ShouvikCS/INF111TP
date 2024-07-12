@@ -22,16 +22,21 @@ public class BdQuestionsReponses implements Serializable {
         this.reponses[this.nbReponses] = new Reponse(reponse);
         Noeud ques = new Noeud(this.questions.size()-1);
         Noeud reps = new Noeud(nbReponses);
-        ques.setGauche(reps);// ? uncertain , when do you set the right reference then?
+        ques.setGauche(reps);
         if (estVide()) {
             this.infoJeu.setPremier(ques);
             this.infoJeu.setCourant(ques);
-        } else if (){
+            this.infoJeu.setDerniereQuestionPositive(true);
+        } else if (!this.infoJeu.isDerniereQuestionPositive() && this.infoJeu.getCourant().getDroite() == null && this.infoJeu.getCourant().getGauche() != null){
             this.infoJeu.getCourant().setDroite(ques);
             this.infoJeu.getCourant().getDroite().setGauche(reps);
-        } else if (){
-
-        }
+        } else if (this.infoJeu.isDerniereQuestionPositive() && !deplacerDansArbre(1)){
+            ques.setDroite(this.infoJeu.getCourant());
+            this.infoJeu.getPrecedent().setGauche(ques);
+        } else {
+            ques.setDroite(this.infoJeu.getCourant());
+            this.infoJeu.getPrecedent().setDroite(ques);
+        } 
 
         nbReponses++;
 
@@ -55,7 +60,7 @@ public class BdQuestionsReponses implements Serializable {
 
     public void choisirPremiereQuestion() {
         infoJeu.setCourant(infoJeu.getPremier());
-        infoJeu.derniereQuestionPositive = false;
+        infoJeu.setDerniereQuestionPositive(false);;
         infoJeu.setPrecedent(null);
 
 

@@ -1,7 +1,7 @@
 import java.io.Serializable;
 public class InfoJeu implements Serializable {
     private Noeud premier, courant, precedent;
-    boolean derniereQuestionPositive;
+    private boolean derniereQuestionPositive;
     public InfoJeu (){
         this.premier = null;
         this.courant = null;
