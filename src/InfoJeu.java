@@ -1,7 +1,11 @@
 import java.io.Serializable;
+import java.util.List;
+
 public class InfoJeu implements Serializable {
     private Noeud premier, courant, precedent;
     private boolean derniereQuestionPositive;
+
+    private Liste indicesCourrantes;
     public InfoJeu (){
         this.premier = null;
         this.courant = null;

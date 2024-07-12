@@ -36,7 +36,7 @@ public class BdQuestionsReponses implements Serializable {
         } else {
             ques.setDroite(this.infoJeu.getCourant());
             this.infoJeu.getPrecedent().setDroite(ques);
-        } 
+        }
 
         nbReponses++;
 
@@ -62,7 +62,6 @@ public class BdQuestionsReponses implements Serializable {
         infoJeu.setCourant(infoJeu.getPremier());
         infoJeu.setDerniereQuestionPositive(false);;
         infoJeu.setPrecedent(null);
-
 
         //Cette procédure place la référence nœud courant
         //du type-enregistrement InfoJeu sur le premier nœud. La dernière réponse de
@@ -97,15 +96,17 @@ public class BdQuestionsReponses implements Serializable {
         if (reponse == 0) {
             infoJeu.setDerniereQuestionPositive(true);
             infoJeu.setCourant(infoJeu.getCourant().getGauche());
+            this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_POSITIVE);
 
             return true;
         } else {
             infoJeu.setDerniereQuestionPositive(false);
+            this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_NEGATIVE);
+
             if (infoJeu.getCourant().getDroite() == null) {
                 return false;
             } else {
                 infoJeu.setCourant(infoJeu.getCourant().getDroite());
-
                 return true;
             }
         }

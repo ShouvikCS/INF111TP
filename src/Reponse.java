@@ -11,7 +11,7 @@ public class Reponse implements Serializable {
         this.indices = new Liste();
     }
 
-    public void addIndices(Integer indice) {
+    public void addIndices(Character indice) {
         this.indices.enfiler(indice);
     }
 
