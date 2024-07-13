@@ -20,7 +20,7 @@ public class UtilitaireES {
     /**********************************
      * AFFICHER PRESENTATION DU JEU
      *
-     * Affiche un boîte de message qui explique le jeu.
+     * Affiche un boï¿½te de message qui explique le jeu.
      *
      **********************************/
     public static void afficherPresentationJeu(){
@@ -30,15 +30,15 @@ public class UtilitaireES {
                 "***********JEU DU DIVINATEURS*******\n" +
                 "***************************************\n" +
                 "***************************************\n" +
-                "Il s'agit de penser à un animal, un objet ou un \n" +
+                "Il s'agit de penser ï¿½ un animal, un objet ou un \n" +
                 "personnage et nous tentons de le trouver \n" +
                 "en posant des questions auxquelles \n" +
-                "vous devrez répondre par  oui ou par non.\n\n\n" +
-                "Si nous ne trouvons pas, vous pourrez nous dire ce à \n" +
+                "vous devrez rï¿½pondre par  oui ou par non.\n\n\n" +
+                "Si nous ne trouvons pas, vous pourrez nous dire ce ï¿½ \n" +
                 "quoi vous pensiez et ajouter une question qui distingue\n" +
-                "votre réponse des autres.\n\n\n" +
+                "votre rï¿½ponse des autres.\n\n\n" +
                 "Des mauvaises questions peuvent d?ranger" +
-                " le bon déroulement du jeu." +
+                " le bon dï¿½roulement du jeu." +
                 "\n" +
                 "************************************";
 
@@ -67,7 +67,7 @@ public class UtilitaireES {
         // Choisir une premi?re question dans la bd.
         bd.choisirPremiereQuestion();
 
-        // Tant  qu'on a pas trouvé la réponse et qu'il reste des questions et
+        // Tant  qu'on a pas trouvï¿½ la rï¿½ponse et qu'il reste des questions et
         // que l'utilisateur n'appuie pas sur X.
         while(reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
                 !bd.reponseTrouvee() && // and the 2 references left and right are not null
@@ -100,7 +100,7 @@ public class UtilitaireES {
         if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
 
             reponse = JOptionPane.showConfirmDialog(null,
-                    "La réponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+                    "La rï¿½ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
             if(reponse != JOptionPane.CANCEL_OPTION &&
@@ -110,7 +110,7 @@ public class UtilitaireES {
                 if (reponse == 0){
 
                     JOptionPane.showMessageDialog(null,
-                            "Bravo nous avons trouvé votre reponse");
+                            "Bravo nous avons trouvï¿½ votre reponse");
                 }
 
                 // Autrement, on demande quel est sa r?ponse.
@@ -132,20 +132,46 @@ public class UtilitaireES {
     }
 
     public static void demanderReponseValide(BdQuestionsReponses bd) {
-        String reponse = JOptionPane.showInputDialog(null, "Je ne connais rien. Entrez ce à quoi vous pensiez?");
-        if (!bd.estVide()){
-            String question = JOptionPane.showInputDialog(null, "Ajouter une question ");
-            bd.ajouterQuestionReponse(question, reponse);
-            UtilitaireFichier.sauvegarde(bd, "bd.bin");
-            return;
+        // demande pour une rï¿½ponse
+        String reponse = null;
+        String question = null;
+
+        while(true) { //force une reponse si la bd est vide
+            reponse = JOptionPane.showInputDialog(
+                    null,
+                    bd.estVide() ? "Je ne connais rien. Entrez ce ï¿½ quoi vous pensiez?" : "Je n'ai pas trouvï¿½ votre rï¿½ponse, Entrez ï¿½ quoi vous pensiez");
+            if(reponse != null && !reponse.trim().isEmpty()) { // si une rï¿½ponse n'est pas une chaine vide ou null
+                reponse.toLowerCase();
+                if (bd.reponseExiste(reponse)) { // si la reponse n'existe pas deja dans la bd
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "La reponse existe dï¿½jï¿½");
+                    return;
+                }
+
+                // demande pour une question
+                while(true) { // force une question si la bd est vide
+                    question = JOptionPane.showInputDialog(
+                            null,
+                            "Ajouter une question ");
+
+                    if (question != null && !question.trim().isEmpty()) { // si la question n'est pas une chaine vide ou null
+                        question.toLowerCase();
+                        bd.ajouterQuestionReponse(question, reponse);
+                        UtilitaireFichier.sauvegarde(bd, "bd.bin");
+                        break;
+                    } else if (!bd.estVide()) {
+                        break;
+                    }
+                }
+
+                break;
+            } else if(!bd.estVide()){
+                break;
+            }
         }
-        if (bd.reponseExiste(reponse)){
-            JOptionPane.showInputDialog(null, "la reponse existe déjà");
-        } else {
-            String question = JOptionPane.showInputDialog(null, "Ajouter une question ");
-            bd.ajouterQuestionReponse(question, reponse);
-        }
-        UtilitaireFichier.sauvegarde(bd, "bd.bin");
+
+
     }
 
 }
