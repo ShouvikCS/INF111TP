@@ -52,7 +52,23 @@ public class Liste implements Serializable {
         return nbElement;
     }
 
-    private class Noeud {
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("Liste: ");
+        Noeud current = premier;
+        while (current != null) {
+            result.append(current.donnee).append(", ");
+            current = current.suivant;
+        }
+        if (result.length() > 7) {
+            result.setLength(result.length() - 2); // Remove the last comma and space
+        } else {
+            result.append("empty");
+        }
+        return result.toString();
+    }
+
+    private class Noeud implements Serializable{
         public Object donnee;
         public Noeud suivant;
 

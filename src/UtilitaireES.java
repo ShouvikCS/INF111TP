@@ -23,7 +23,7 @@ public class UtilitaireES {
      * Affiche un bo�te de message qui explique le jeu.
      *
      **********************************/
-    public static void afficherPresentationJeu(){
+    public static void afficherPresentationJeu() {
 
 
         String str = "***************************************\n" +
@@ -46,9 +46,6 @@ public class UtilitaireES {
     }
 
 
-
-
-
     /***************************
      * DEMARRER DIVINATEUR
      *************************
@@ -56,7 +53,7 @@ public class UtilitaireES {
      *posant les questions provenant de la base de donn?es des r?ponses et
      *en agissant selon lles indices donn?s par l'utilisateur.
      */
-    public static void demarrerDivinateur(BdQuestionsReponses bd){
+    public static void demarrerDivinateur(BdQuestionsReponses bd) {
 
         // Sert a retenir s'il reste des question.
         boolean resteQuestion = true;
@@ -69,17 +66,17 @@ public class UtilitaireES {
 
         // Tant  qu'on a pas trouv� la r�ponse et qu'il reste des questions et
         // que l'utilisateur n'appuie pas sur X.
-        while(reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
+        while (reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
                 !bd.reponseTrouvee() && // and the 2 references left and right are not null
-                resteQuestion){ // s'il reste des question.
+                resteQuestion) { // s'il reste des question.
 
-            String [] options =  {"Oui", "Non"};
+            String[] options = {"Oui", "Non"};
 
             String str = bd.getLaChaineActuelle();
 
             // On pose la question courante dans l'arbre de connaissance de la bd.
-            reponse  = JOptionPane.showOptionDialog(null,
-                    str + ((str.charAt(str.length() -1) == '?')? " " : "?"),
+            reponse = JOptionPane.showOptionDialog(null,
+                    str + ((str.charAt(str.length() - 1) == '?') ? " " : "?"),
                     "Jeu du divinateur",
                     JOptionPane.CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
@@ -87,7 +84,7 @@ public class UtilitaireES {
                     options,
                     "Oui");
 
-            if(reponse != JOptionPane.CLOSED_OPTION){
+            if (reponse != JOptionPane.CLOSED_OPTION) {
 
                 // On se prom?ne dans l'arbre de connaissances.
                 resteQuestion = bd.deplacerDansArbre(reponse);
@@ -103,18 +100,18 @@ public class UtilitaireES {
                     "La r�ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
-            if(reponse != JOptionPane.CANCEL_OPTION &&
-                    reponse != JOptionPane.CLOSED_OPTION){
+            if (reponse != JOptionPane.CANCEL_OPTION &&
+                    reponse != JOptionPane.CLOSED_OPTION) {
 
                 // Si c'est oui, on a trouv?, bravo!
-                if (reponse == 0){
+                if (reponse == 0) {
 
                     JOptionPane.showMessageDialog(null,
                             "Bravo nous avons trouv� votre reponse");
                 }
 
                 // Autrement, on demande quel est sa r?ponse.
-                else{
+                else {
 
                     demanderReponseValide(bd);
                 }
@@ -123,8 +120,8 @@ public class UtilitaireES {
         }
 
         // Il ne reste plus de questions alors si l'utilisateur n'annule pas
-        else if(reponse != JOptionPane.CANCEL_OPTION &&
-                reponse != JOptionPane.CLOSED_OPTION){
+        else if (reponse != JOptionPane.CANCEL_OPTION &&
+                reponse != JOptionPane.CLOSED_OPTION) {
 
             // On demande quel est sa r?ponse.
             demanderReponseValide(bd);
@@ -136,42 +133,53 @@ public class UtilitaireES {
         String reponse = null;
         String question = null;
 
-        while(true) { //force une reponse si la bd est vide
+        while (true) { // force une reponse si la bd est vide
             reponse = JOptionPane.showInputDialog(
                     null,
                     bd.estVide() ? "Je ne connais rien. Entrez ce � quoi vous pensiez?" : "Je n'ai pas trouv� votre r�ponse, Entrez � quoi vous pensiez");
-            if(reponse != null && !reponse.trim().isEmpty()) { // si une r�ponse n'est pas une chaine vide ou null
-                reponse.toLowerCase();
+            if (reponse != null && !reponse.trim().isEmpty()) { // si une r�ponse n'est pas une chaine vide ou null
+                reponse = reponse.toLowerCase();
+                System.out.println(reponse);
                 if (bd.reponseExiste(reponse)) { // si la reponse n'existe pas deja dans la bd
+
+                    String texte = reponse + " existe deja dans notre base de donnee,\n" +
+                            "Vous auriez du repondre " + "(OUI/NON)" + " a la question: \n" +
+                            "(LA QUESTION)" + "\n" + ///
+                            "mais vous avez repondu " + "(OUI/NON)" + "\n";
+
                     JOptionPane.showMessageDialog(
                             null,
-                            "La reponse existe d�j�");
+                            texte);
                     return;
                 }
 
                 // demande pour une question
-                while(true) { // force une question si la bd est vide
+                while (true) { // force une question si la bd est vide
                     question = JOptionPane.showInputDialog(
                             null,
-                            "Ajouter une question ");
+                            "Entrez une question concernant votre objet ou votre animal qui le distingue: ");
 
                     if (question != null && !question.trim().isEmpty()) { // si la question n'est pas une chaine vide ou null
-                        question.toLowerCase();
+                        question = question.toLowerCase();
                         bd.ajouterQuestionReponse(question, reponse);
-                        UtilitaireFichier.sauvegarde(bd, "bd.bin");
+                        UtilitaireFichier.sauvegarde(bd, Constantes.NOM_FICHIER_BD);
                         break;
-                    } else if (!bd.estVide()) {
-                        break;
+                    } else if (question == null) {
+                        if (!bd.estVide()) {
+                            break;
+                        } else {
+                            System.exit(0);
+                        }
                     }
                 }
-
                 break;
-            } else if(!bd.estVide()){
-                break;
+            } else if (reponse == null) { // if cancel is pressed, reponse returns null
+                if (!bd.estVide()) { // if the bd had answers, simply exit loop
+                    break;
+                } else { // if the bd was empty, exit program, forces the user to put initial data into the db next launch
+                    System.exit(0);
+                }
             }
         }
-
-
     }
-
 }

@@ -11,6 +11,7 @@ public class InfoJeu implements Serializable {
         this.courant = null;
         this.precedent = null;
         this.derniereQuestionPositive = false;
+        this.indicesCourrantes = new Liste();
     }
     public Noeud getPremier() {
         return premier;
@@ -37,6 +38,19 @@ public class InfoJeu implements Serializable {
     }
     public void setDerniereQuestionPositive(boolean derniereQuestionPositive) {
         this.derniereQuestionPositive = derniereQuestionPositive;
+    }
+
+    public void addIndiceCourrante(Object noeud) {
+        indicesCourrantes.enfiler(noeud);
+        System.out.println(getIndicesCourrantes());
+    }
+
+    public void emptyIndiceCourrante(){
+        indicesCourrantes = new Liste();
+    }
+
+    public Liste getIndicesCourrantes() {
+        return indicesCourrantes;
     }
 
 }

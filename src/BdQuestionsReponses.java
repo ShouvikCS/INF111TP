@@ -62,6 +62,7 @@ public class BdQuestionsReponses implements Serializable {
         infoJeu.setCourant(infoJeu.getPremier());
         infoJeu.setDerniereQuestionPositive(false);;
         infoJeu.setPrecedent(null);
+        infoJeu.emptyIndiceCourrante();
 
         //Cette procédure place la référence nœud courant
         //du type-enregistrement InfoJeu sur le premier nœud. La dernière réponse de
@@ -94,14 +95,19 @@ public class BdQuestionsReponses implements Serializable {
     public boolean deplacerDansArbre(int reponse) {
         System.out.println(reponse); // Oui = 0; Non = 1
         if (reponse == 0) {
+            infoJeu.addIndiceCourrante("O");
             infoJeu.setDerniereQuestionPositive(true);
             infoJeu.setCourant(infoJeu.getCourant().getGauche());
             this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_POSITIVE);
 
             return true;
         } else {
-            infoJeu.setDerniereQuestionPositive(false);
             this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_NEGATIVE);
+
+            if(infoJeu.getCourant().getGauche() != null){
+                infoJeu.addIndiceCourrante("N");
+                infoJeu.setDerniereQuestionPositive(false);
+            }
 
             if (infoJeu.getCourant().getDroite() == null) {
                 return false;
