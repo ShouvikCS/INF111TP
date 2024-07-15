@@ -39,7 +39,6 @@ public class InfoJeu implements Serializable {
     public void setDerniereQuestionPositive(boolean derniereQuestionPositive) {
         this.derniereQuestionPositive = derniereQuestionPositive;
     }
-
     public void addIndiceCourrante(Object noeud) {
         indicesCourrantes.enfiler(noeud);
         System.out.println(getIndicesCourrantes());

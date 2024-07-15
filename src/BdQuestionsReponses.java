@@ -44,9 +44,10 @@ public class BdQuestionsReponses implements Serializable {
     // Verifie si la reponse existe dans tableau de reponse
     public boolean reponseExiste(String reponse) {
         for (int i = 0; i < this.reponses.length; i++) {
-            if (this.reponses[i] == null) {
-                break;
-            } else if (this.reponses[i].equals(reponse)) {
+            if (estVide()){
+                return false;
+            }
+            if (this.reponses[i] != null && this.reponses[i].getReponse().equals(reponse) ) {
                 return true;
             }
         }
