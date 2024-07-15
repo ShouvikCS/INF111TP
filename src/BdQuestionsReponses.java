@@ -10,19 +10,27 @@ public class BdQuestionsReponses implements Serializable {
 
     public BdQuestionsReponses() {
         infoJeu = new InfoJeu();
-        questions = new ArrayList<String>();
+        questions = new ArrayList<>();
         reponses = new Reponse[100];
         this.nbReponses = 0;
     }
 
     public void ajouterQuestionReponse(String question, String reponse) {
 
+        int questionIndex = 0;
 
-        this.questions.add(question);
+        if (this.questions.contains(question)) { // if the question already exists in the arraylist, we simply save its index
+            questionIndex = this.questions.indexOf(question);
+        } else { //otherwise, we add the unique question and the index is (the size of the array - 1)
+            this.questions.add(question);
+            questionIndex = this.questions.size() - 1;
+        }
+
         this.reponses[this.nbReponses] = new Reponse(reponse);
-        Noeud ques = new Noeud(this.questions.size()-1);
+        Noeud ques = new Noeud(questionIndex);
         Noeud reps = new Noeud(nbReponses);
         ques.setGauche(reps);
+        
         if (estVide()) {
             this.infoJeu.setPremier(ques);
             this.infoJeu.setCourant(ques);
