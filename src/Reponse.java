@@ -26,4 +26,8 @@ public class Reponse implements Serializable {
     public Liste getIndices() {
         return indices;
     }
+
+    public void setIndices(Liste indices) {
+        this.indices = indices;
+    }
 }
