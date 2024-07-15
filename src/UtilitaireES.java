@@ -20,7 +20,7 @@ public class UtilitaireES {
     /**********************************
      * AFFICHER PRESENTATION DU JEU
      *
-     * Affiche un bo�te de message qui explique le jeu.
+     * Affiche un bo?te de message qui explique le jeu.
      *
      **********************************/
     public static void afficherPresentationJeu() {
@@ -34,7 +34,7 @@ public class UtilitaireES {
                 "personnage et nous tentons de le trouver \n" +
                 "en posant des questions auxquelles \n" +
                 "vous devrez repondre par  oui ou par non.\n\n\n" +
-                "Si nous ne trouvons pas, vous pourrez nous dire ce � \n" +
+                "Si nous ne trouvons pas, vous pourrez nous dire ce ? \n" +
                 "quoi vous pensiez et ajouter une question qui distingue\n" +
                 "votre reponse des autres.\n\n\n" +
                 "Des mauvaises questions peuvent d?ranger" +
@@ -64,7 +64,7 @@ public class UtilitaireES {
         // Choisir une premi?re question dans la bd.
         bd.choisirPremiereQuestion();
 
-        // Tant  qu'on a pas trouv� la r�ponse et qu'il reste des questions et
+        // Tant  qu'on a pas trouv? la r?ponse et qu'il reste des questions et
         // que l'utilisateur n'appuie pas sur X.
         while (reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
                 !bd.reponseTrouvee() && // and the 2 references left and right are not null
@@ -97,7 +97,7 @@ public class UtilitaireES {
         if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
 
             reponse = JOptionPane.showConfirmDialog(null,
-                    "La r�ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+                    "La r?ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
             if (reponse != JOptionPane.CANCEL_OPTION &&
@@ -107,7 +107,7 @@ public class UtilitaireES {
                 if (reponse == 0) {
 
                     JOptionPane.showMessageDialog(null,
-                            "Bravo nous avons trouv� votre reponse");
+                            "Bravo nous avons trouv? votre reponse");
                 }
 
                 // Autrement, on demande quel est sa r?ponse.
@@ -136,7 +136,7 @@ public class UtilitaireES {
             reponse = JOptionPane.showInputDialog(
                     null,
                     bd.estVide() ? "Je ne connais rien. Entrez ce a quoi vous pensiez?" : "Je n'ai pas trouve votre reponse, Entrez a quoi vous pensiez");
-            if (reponse != null && !reponse.trim().isEmpty()) { // si une r�ponse n'est pas une chaine vide ou null
+            if (reponse != null && !reponse.trim().isEmpty()) { // si une r?ponse n'est pas une chaine vide ou null
                 reponse = reponse.toLowerCase();
                 if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
 
