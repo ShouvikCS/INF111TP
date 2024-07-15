@@ -38,16 +38,23 @@ public class BdQuestionsReponses implements Serializable {
         } else if (!this.infoJeu.isDerniereQuestionPositive() && this.infoJeu.getCourant().getDroite() == null && this.infoJeu.getCourant().getGauche() != null){
             this.infoJeu.getCourant().setDroite(ques);
             this.infoJeu.getCourant().getDroite().setGauche(reps);
-            Liste listTemp = new Liste(infoJeu.getIndicesCourrantes());
+            Liste listTemp = new Liste(infoJeu.getIndicesCourrants());
             listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
-            System.out.println(this.reponses[this.nbReponses].getIndices().toString() + "temp");
         } else if (this.infoJeu.isDerniereQuestionPositive() && !deplacerDansArbre(1)){
+            reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler("N");
             ques.setDroite(this.infoJeu.getCourant());
             this.infoJeu.getPrecedent().setGauche(ques);
+            Liste listTemp = new Liste(infoJeu.getIndicesCourrants());
+            listTemp.enfiler("O");
+            this.reponses[this.nbReponses].setIndices(listTemp);
         } else {
             ques.setDroite(this.infoJeu.getCourant());
+            reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler("N");
             this.infoJeu.getPrecedent().setDroite(ques);
+            Liste listTemp = new Liste(infoJeu.getIndicesCourrants());
+            listTemp.enfiler("O");
+            this.reponses[this.nbReponses].setIndices(listTemp);
         }
 
         nbReponses++;

@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.List;
 
 public class InfoJeu implements Serializable {
     private Noeud premier, courant, precedent;
@@ -41,14 +40,14 @@ public class InfoJeu implements Serializable {
     }
     public void addIndiceCourrante(Object noeud) {
         indicesCourrantes.enfiler(noeud);
-        System.out.println(getIndicesCourrantes());
+        System.out.println(getIndicesCourrants());
     }
 
     public void emptyIndiceCourrante(){
         indicesCourrantes = new Liste();
     }
 
-    public Liste getIndicesCourrantes() {
+    public Liste getIndicesCourrants() {
         return indicesCourrantes;
     }
 
