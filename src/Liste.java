@@ -11,6 +11,15 @@ public class Liste implements Serializable {
         this.nbElement = 0;
     }
 
+    public Liste(Liste other) {
+        this();
+        ListeNoeud current = other.premier;
+        while (current != null) {
+            this.enfiler(current.donnee);
+            current = current.suivant;
+        }
+    }
+
     public boolean enfiler(Object element) {
         ListeNoeud nouveau = new ListeNoeud(null, element);
         if (this.dernier == null) {
@@ -67,6 +76,8 @@ public class Liste implements Serializable {
         }
         return result.toString();
     }
+
+
 
     private class ListeNoeud implements Serializable{
         public Object donnee;

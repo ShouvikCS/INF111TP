@@ -38,6 +38,10 @@ public class BdQuestionsReponses implements Serializable {
         } else if (!this.infoJeu.isDerniereQuestionPositive() && this.infoJeu.getCourant().getDroite() == null && this.infoJeu.getCourant().getGauche() != null){
             this.infoJeu.getCourant().setDroite(ques);
             this.infoJeu.getCourant().getDroite().setGauche(reps);
+            Liste listTemp = new Liste(infoJeu.getIndicesCourrantes());
+            listTemp.enfiler("O");
+            this.reponses[this.nbReponses].setIndices(listTemp);
+            System.out.println(this.reponses[this.nbReponses].getIndices().toString() + "temp");
         } else if (this.infoJeu.isDerniereQuestionPositive() && !deplacerDansArbre(1)){
             ques.setDroite(this.infoJeu.getCourant());
             this.infoJeu.getPrecedent().setGauche(ques);
@@ -107,11 +111,11 @@ public class BdQuestionsReponses implements Serializable {
             infoJeu.addIndiceCourrante("O");
             infoJeu.setDerniereQuestionPositive(true);
             infoJeu.setCourant(infoJeu.getCourant().getGauche());
-            this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_POSITIVE);
+           // this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_POSITIVE);
 
             return true;
         } else {
-            this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_NEGATIVE);
+           // this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_NEGATIVE);
 
             if(infoJeu.getCourant().getGauche() != null){
                 infoJeu.addIndiceCourrante("N");
