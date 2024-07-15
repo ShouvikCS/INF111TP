@@ -30,15 +30,15 @@ public class UtilitaireES {
                 "***********JEU DU DIVINATEURS*******\n" +
                 "***************************************\n" +
                 "***************************************\n" +
-                "Il s'agit de penser � un animal, un objet ou un \n" +
+                "Il s'agit de penser a un animal, un objet ou un \n" +
                 "personnage et nous tentons de le trouver \n" +
                 "en posant des questions auxquelles \n" +
-                "vous devrez r�pondre par  oui ou par non.\n\n\n" +
+                "vous devrez repondre par  oui ou par non.\n\n\n" +
                 "Si nous ne trouvons pas, vous pourrez nous dire ce � \n" +
                 "quoi vous pensiez et ajouter une question qui distingue\n" +
-                "votre r�ponse des autres.\n\n\n" +
+                "votre reponse des autres.\n\n\n" +
                 "Des mauvaises questions peuvent d?ranger" +
-                " le bon d�roulement du jeu." +
+                " le bon deroulement du jeu." +
                 "\n" +
                 "************************************";
 
@@ -129,28 +129,26 @@ public class UtilitaireES {
     }
 
     public static void demanderReponseValide(BdQuestionsReponses bd) {
-        // demande pour une r�ponse
         String reponse = null;
         String question = null;
 
         while (true) { // force une reponse si la bd est vide
             reponse = JOptionPane.showInputDialog(
                     null,
-                    bd.estVide() ? "Je ne connais rien. Entrez ce � quoi vous pensiez?" : "Je n'ai pas trouv� votre r�ponse, Entrez � quoi vous pensiez");
+                    bd.estVide() ? "Je ne connais rien. Entrez ce a quoi vous pensiez?" : "Je n'ai pas trouve votre reponse, Entrez a quoi vous pensiez");
             if (reponse != null && !reponse.trim().isEmpty()) { // si une r�ponse n'est pas une chaine vide ou null
                 reponse = reponse.toLowerCase();
-                System.out.println(reponse);
-                if (bd.reponseExiste(reponse)) { // si la reponse n'existe pas deja dans la bd
+                if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
 
-                    String texte = reponse + " existe deja dans notre base de donnee,\n" +
+                    String errorMessage = reponse + " existe deja dans notre base de donnee,\n" +
                             "Vous auriez du repondre " + "(OUI/NON)" + " a la question: \n" +
                             "(LA QUESTION)" + "\n" + ///
                             "mais vous avez repondu " + "(OUI/NON)" + "\n";
 
                     JOptionPane.showMessageDialog(
                             null,
-                            texte);
-                    return;
+                            errorMessage);
+                    return; // exit method, which restarts game
                 }
 
                 // demande pour une question
