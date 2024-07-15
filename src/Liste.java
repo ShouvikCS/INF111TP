@@ -2,8 +2,8 @@ import java.io.Serializable;
 
 public class Liste implements Serializable {
 
-    private Noeud premier;
-    private Noeud dernier;
+    private ListeNoeud premier;
+    private ListeNoeud dernier;
     private int nbElement;
 
     public Liste() {
@@ -12,7 +12,7 @@ public class Liste implements Serializable {
     }
 
     public boolean enfiler(Object element) {
-        Noeud nouveau = new Noeud(null, element);
+        ListeNoeud nouveau = new ListeNoeud(null, element);
         if (this.dernier == null) {
             this.premier = this.dernier = nouveau;
             this.nbElement = 1;
@@ -52,11 +52,11 @@ public class Liste implements Serializable {
         return nbElement;
     }
 
-    private class Noeud {
+    private class ListeNoeud {
         public Object donnee;
-        public Noeud suivant;
+        public ListeNoeud suivant;
 
-        public Noeud(Noeud next, Object data) {
+        public ListeNoeud(ListeNoeud next, Object data) {
             this.donnee = data;
             this.suivant = next;
         }

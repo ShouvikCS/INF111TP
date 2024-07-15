@@ -138,7 +138,8 @@ public class UtilitaireES {
                     null,
                     bd.estVide() ? "Je ne connais rien. Entrez ce � quoi vous pensiez?" : "Je n'ai pas trouv� votre r�ponse, Entrez � quoi vous pensiez");
             if (reponse != null && !reponse.trim().isEmpty()) { // si une r�ponse n'est pas une chaine vide ou null
-                reponse.toLowerCase();
+                reponse = reponse.toLowerCase();
+                System.out.println(reponse);
                 if (bd.reponseExiste(reponse)) { // si la reponse n'existe pas deja dans la bd
 
                     String texte = reponse + " existe deja dans notre base de donnee,\n" +
@@ -159,7 +160,7 @@ public class UtilitaireES {
                             "Entrez une question concernant votre objet ou votre animal qui le distingue: ");
 
                     if (question != null && !question.trim().isEmpty()) { // si la question n'est pas une chaine vide ou null
-                        question.toLowerCase();
+                        question = question.toLowerCase();
                         bd.ajouterQuestionReponse(question, reponse);
                         UtilitaireFichier.sauvegarde(bd, Constantes.NOM_FICHIER_BD);
                         break;
