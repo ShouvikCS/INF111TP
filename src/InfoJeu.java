@@ -39,4 +39,5 @@ public class InfoJeu implements Serializable {
         this.derniereQuestionPositive = derniereQuestionPositive;
     }
 
+
 }
