@@ -97,7 +97,7 @@ public class BdQuestionsReponses implements Serializable {
 
     public void choisirPremiereQuestion() {
         infoJeu.setCourant(infoJeu.getPremier());
-        infoJeu.setDerniereQuestionPositive(false);;
+        infoJeu.setDerniereQuestionPositive(false);
         infoJeu.setPrecedent(null);
         infoJeu.emptyIndiceCourrante();
 
@@ -130,8 +130,7 @@ public class BdQuestionsReponses implements Serializable {
     }
 
     public boolean deplacerDansArbre(int reponse) {
-        System.out.println(reponse); // Oui = 0; Non = 1
-        if (reponse == 0) {
+        if (reponse == 0) { // Oui = 0; Non = 1
 
             infoJeu.addIndiceCourrante(Constantes.REPONSE_POSITIVE);
             infoJeu.setDerniereQuestionPositive(true);

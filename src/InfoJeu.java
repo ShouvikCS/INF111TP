@@ -40,7 +40,6 @@ public class InfoJeu implements Serializable {
     }
     public void addIndiceCourrante(Object noeud) {
         indicesCourrantes.enfiler(noeud);
-        System.out.println(getIndicesCourants());
     }
 
     public void emptyIndiceCourrante(){
