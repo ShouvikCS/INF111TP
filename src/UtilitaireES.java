@@ -178,25 +178,30 @@ public class UtilitaireES {
 
     public static String messageErreur(BdQuestionsReponses bd, String reponse) {
 
-        Noeud chercheQuestion = bd.infoJeu.getPremier();
+        Noeud chercheQuestion = bd.getInfoJeu().getPremier();
         boolean indiceMalRepondu = false;
 
-        for (int i = 0; i < bd.reponses.length; i++) {
-            if (bd.reponses[i] != null && bd.reponses[i].getReponse().equals(reponse) ) {
-                Liste listReponse = bd.reponses[i].getIndices();
-                int minSize = Math.min(bd.infoJeu.getIndicesCourants().taille(), listReponse.taille());
-                for (int j = 0; j < minSize; j++) {
-                    if (!bd.infoJeu.getIndicesCourants().get(j).equals(listReponse.get(j))) {
-                        for (int k = 0; k <= j; k++) {
-                            if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)){
-                                indiceMalRepondu = true;
+        for (int i = 0; i < bd.getReponses().length; i++) { // loop through elements in the Reponse[] array
+            if (bd.getReponses()[i] != null && bd.getReponses()[i].getReponse().equals(reponse)) { // if the user input reponse exists in the array already
+                Liste listReponse = bd.getReponses()[i].getIndices(); // get the list of indices of that reponse
+                int minSize = Math.min(bd.getInfoJeu().getIndicesCourants().taille(), listReponse.taille());
+                System.out.println("MIN SIZEE" + minSize);
+                System.out.println(bd.getReponses());
+                for (int j = 0; j < minSize; j++) { // loop through the list of indice
+                    if (!bd.getInfoJeu().getIndicesCourants().get(j).equals(listReponse.get(j))) { // when we find an indice that does not match
+                        System.out.println("JJJJ: " + j + " - Indice: " + bd.getInfoJeu().getIndicesCourants().get(j));
+                        System.out.println("ListeReponse: " + j + " - Indice: " + listReponse.get(j));
+
+                        System.out.println("FINDING NOEUD...");
+                        for (int k = 0; k < j; k++) { // loop through the indices up until that point
+                            if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)) { // if the indice is O go left
                                 chercheQuestion = chercheQuestion.getGauche();
-                            } else {
-                                indiceMalRepondu = false;
+                            } else if (listReponse.get(k).equals(Constantes.REPONSE_NEGATIVE)) { // if the indice is N, go right
                                 chercheQuestion = chercheQuestion.getDroite();
                             }
                         }
-                        break;
+                        indiceMalRepondu = !listReponse.get(j).equals(Constantes.REPONSE_POSITIVE);
+                        break; // we stop at the first difference in the list
                     }
                 }
             }
@@ -204,7 +209,7 @@ public class UtilitaireES {
 
         String indiceIncorrect = indiceMalRepondu ? "Oui" : "Non";
         String indiceCorrect =  indiceMalRepondu ? "Non" : "Oui";
-        String questionMalRepondue = bd.questions.get(chercheQuestion.getIndex());
+        String questionMalRepondue = bd.getQuestions().get(chercheQuestion.getIndex());
 
         String messageErreur = reponse + " existe deja dans notre base de donnee,\n" +
                 "Vous auriez du repondre " + indiceCorrect + " a la question: \n" +
