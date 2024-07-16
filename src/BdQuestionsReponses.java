@@ -15,6 +15,10 @@ public class BdQuestionsReponses implements Serializable {
         this.nbReponses = 0;
     }
 
+    public List<String> getQuestions() {
+        return questions;
+    }
+
     public void ajouterQuestionReponse(String question, String reponse) {
 
         int questionIndex = 0;
@@ -38,21 +42,21 @@ public class BdQuestionsReponses implements Serializable {
         } else if (!this.infoJeu.isDerniereQuestionPositive() && this.infoJeu.getCourant().getDroite() == null && this.infoJeu.getCourant().getGauche() != null){
             this.infoJeu.getCourant().setDroite(ques);
             this.infoJeu.getCourant().getDroite().setGauche(reps);
-            Liste listTemp = new Liste(infoJeu.getIndicesCourrants());
+            Liste listTemp = new Liste(infoJeu.getIndicesCourants());
             listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
         } else if (this.infoJeu.isDerniereQuestionPositive() && !deplacerDansArbre(1)){
             reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler("N");
             ques.setDroite(this.infoJeu.getCourant());
             this.infoJeu.getPrecedent().setGauche(ques);
-            Liste listTemp = new Liste(infoJeu.getIndicesCourrants());
+            Liste listTemp = new Liste(infoJeu.getIndicesCourants());
             listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
         } else {
             ques.setDroite(this.infoJeu.getCourant());
             reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler("N");
             this.infoJeu.getPrecedent().setDroite(ques);
-            Liste listTemp = new Liste(infoJeu.getIndicesCourrants());
+            Liste listTemp = new Liste(infoJeu.getIndicesCourants());
             listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
         }
@@ -115,14 +119,13 @@ public class BdQuestionsReponses implements Serializable {
     public boolean deplacerDansArbre(int reponse) {
         System.out.println(reponse); // Oui = 0; Non = 1
         if (reponse == 0) {
+
             infoJeu.addIndiceCourrante("O");
             infoJeu.setDerniereQuestionPositive(true);
             infoJeu.setCourant(infoJeu.getCourant().getGauche());
-           // this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_POSITIVE);
-
             return true;
+
         } else {
-           // this.reponses[this.infoJeu.getCourant().getIndex()].addIndices(Constantes.REPONSE_NEGATIVE);
 
             if(infoJeu.getCourant().getGauche() != null){
                 infoJeu.addIndiceCourrante("N");

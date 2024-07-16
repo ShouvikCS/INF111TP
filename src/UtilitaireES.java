@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
  * Classe impl?mentant des sous programmes utilitaires
@@ -97,7 +96,7 @@ public class UtilitaireES {
         if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
 
             reponse = JOptionPane.showConfirmDialog(null,
-                    "La r?ponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+                    "La reponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
 
             // Si l'utilisateur n'annule pas.
             if (reponse != JOptionPane.CANCEL_OPTION &&
@@ -107,7 +106,7 @@ public class UtilitaireES {
                 if (reponse == 0) {
 
                     JOptionPane.showMessageDialog(null,
-                            "Bravo nous avons trouv? votre reponse");
+                            "Bravo nous avons trouve votre reponse");
                 }
 
                 // Autrement, on demande quel est sa r?ponse.
@@ -140,14 +139,10 @@ public class UtilitaireES {
                 reponse = reponse.toLowerCase();
                 if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
 
-                    String errorMessage = reponse + " existe deja dans notre base de donnee,\n" +
-                            "Vous auriez du repondre " + "(OUI/NON)" + " a la question: \n" +
-                            "(LA QUESTION)" + "\n" + ///
-                            "mais vous avez repondu " + "(OUI/NON)" + "\n";
-
                     JOptionPane.showMessageDialog(
                             null,
-                            errorMessage);
+                            messageErreur(bd, reponse));
+
                     return; // exit method, which restarts game
                 }
 
@@ -179,5 +174,43 @@ public class UtilitaireES {
                 }
             }
         }
+    }
+
+    public static String messageErreur(BdQuestionsReponses bd, String reponse) {
+
+        Noeud chercheQuestion = bd.infoJeu.getPremier();
+        boolean indiceMalRepondu = false;
+
+        for (int i = 0; i < bd.reponses.length; i++) {
+            if (bd.reponses[i] != null && bd.reponses[i].getReponse().equals(reponse) ) {
+                Liste listReponse = bd.reponses[i].getIndices();
+                int minSize = Math.min(bd.infoJeu.getIndicesCourants().taille(), listReponse.taille());
+                for (int j = 0; j < minSize; j++) {
+                    if (!bd.infoJeu.getIndicesCourants().get(j).equals(listReponse.get(j))) {
+                        for (int k = 0; k <= j; k++) {
+                            if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)){
+                                indiceMalRepondu = true;
+                                chercheQuestion = chercheQuestion.getGauche();
+                            } else {
+                                indiceMalRepondu = false;
+                                chercheQuestion = chercheQuestion.getDroite();
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        String indiceIncorrect = indiceMalRepondu ? "Oui" : "Non";
+        String indiceCorrect =  indiceMalRepondu ? "Non" : "Oui";
+        String questionMalRepondue = bd.questions.get(chercheQuestion.getIndex());
+
+        String messageErreur = reponse + " existe deja dans notre base de donnee,\n" +
+                "Vous auriez du repondre " + indiceCorrect + " a la question: \n" +
+                questionMalRepondue + "\n" + ///
+                "mais vous avez repondu " + indiceIncorrect + "\n";
+
+        return messageErreur;
     }
 }

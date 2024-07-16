@@ -49,6 +49,17 @@ public class Liste implements Serializable {
         return nbElement == 0;
     }
 
+    public Object get(int index) {
+        if (index < 0 || index >= nbElement) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + nbElement);
+        }
+        ListeNoeud current = premier;
+        for (int i = 0; i < index; i++) {
+            current = current.suivant;
+        }
+        return current.donnee;
+    }
+
 
     public void vider() {
         while (!estVide())
