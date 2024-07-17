@@ -36,7 +36,7 @@ public class UtilitaireES {
                 "Si nous ne trouvons pas, vous pourrez nous dire ce ? \n" +
                 "quoi vous pensiez et ajouter une question qui distingue\n" +
                 "votre reponse des autres.\n\n\n" +
-                "Des mauvaises questions peuvent d?ranger" +
+                "Des mauvaises questions peuvent deranger" +
                 " le bon deroulement du jeu." +
                 "\n" +
                 "************************************";
@@ -179,7 +179,7 @@ public class UtilitaireES {
     public static String messageErreur(BdQuestionsReponses bd, String reponse) {
 
         Noeud chercheQuestion = bd.getInfoJeu().getPremier();
-        boolean indiceMalRepondu = false;
+        boolean indiceIncorrectEstPositif = false;
 
         for (int i = 0; i < bd.getReponses().length; i++) { // loop through elements in the Reponse[] array
             if (bd.getReponses()[i] != null && bd.getReponses()[i].getReponse().equals(reponse)) { // if the user input reponse exists in the array already
@@ -194,21 +194,21 @@ public class UtilitaireES {
                                 chercheQuestion = chercheQuestion.getDroite();
                             }
                         }
-                        indiceMalRepondu = !listReponse.get(j).equals(Constantes.REPONSE_POSITIVE);
+                        indiceIncorrectEstPositif = listReponse.get(j).equals(Constantes.REPONSE_POSITIVE);
                         break; // we stop at the first difference in the list
                     }
                 }
             }
         }
 
-        String indiceIncorrect = indiceMalRepondu ? "Oui" : "Non";
-        String indiceCorrect = indiceMalRepondu ? "Non" : "Oui";
+        String indiceIncorrectDonne = indiceIncorrectEstPositif ? "Oui" : "Non";
+        String indiceCorrectADonner = indiceIncorrectEstPositif ? "Non" : "Oui";
         String questionMalRepondue = bd.getQuestions().get(chercheQuestion.getIndex());
 
         String messageErreur = reponse + " existe deja dans notre base de donnee,\n" +
-                "Vous auriez du repondre " + indiceCorrect + " a la question: \n" +
-                questionMalRepondue + "\n" + ///
-                "mais vous avez repondu " + indiceIncorrect + "\n";
+                "Vous auriez du repondre " + indiceCorrectADonner + " a la question: \n" +
+                questionMalRepondue + ((questionMalRepondue.charAt(questionMalRepondue.length() - 1) == '?') ? " " : "?") + "\n" + ///
+                "mais vous avez repondu " + indiceIncorrectDonne + "\n";
 
         return messageErreur;
     }

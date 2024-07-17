@@ -32,7 +32,7 @@ public class DemarrerJeuDivinateur {
 
         // Lorsque le jeu fonctionne, enlever le commentaire pour
         // dans la version officielle.
-        // UtilitaireES.afficherPresentationJeu();
+         UtilitaireES.afficherPresentationJeu();
 
         //  Si la bd est vide, on demande simplement un objet ou un animal et
         // au moins une question qui le distingue.  Autrement dit, on s'assure
@@ -64,7 +64,7 @@ public class DemarrerJeuDivinateur {
 
         // Lorsque le jeu fonctionne, enlever le commentaire pour
         // dans la version officielle.
-        //JOptionPane.showMessageDialog(null, "Merci d'avoir jouer avec nous!");
+        JOptionPane.showMessageDialog(null, "Merci d'avoir jouer avec nous!");
 
         // Fermeture de la fenetre en arriere.
         cadre.dispose();

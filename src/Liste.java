@@ -20,17 +20,16 @@ public class Liste implements Serializable {
         }
     }
 
-    public boolean enfiler(Object element) {
+    public void enfiler(Object element) {
         ListeNoeud nouveau = new ListeNoeud(null, element);
         if (this.dernier == null) {
             this.premier = this.dernier = nouveau;
             this.nbElement = 1;
-            return true;
+            return;
         }
         this.dernier.suivant = nouveau;   //  1
         this.dernier = nouveau; //  2
         nbElement++;
-        return true;
     }
 
     public Object defiler() {
