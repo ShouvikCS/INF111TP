@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 /**
  * Classe impl?mentant des sous programmes utilitaires
  * qui permettent de faire de la saisie au clavier pour le jeu du divinateur.
@@ -159,10 +160,10 @@ public class UtilitaireES {
 
                     if (question != null && !question.trim().isEmpty()) { // si la question n'est pas une chaine vide ou null
                         question = question.toLowerCase();
-                        bd.ajouterQuestionReponse(question, reponse);
+                        String nomFicImage = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.OUVRE, "jpg");
+                        bd.ajouterQuestionReponse(question, reponse, new ImageIcon(nomFicImage));
                         UtilitaireFichier.sauvegarde(bd, Constantes.NOM_FICHIER_BD);
-                        break;
-                    } else if (question == null) {
+                        break;                    } else if (question == null) {
                         if (!bd.estVide()) {
                             break;
                         } else {

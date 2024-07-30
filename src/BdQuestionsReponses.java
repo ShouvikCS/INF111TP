@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
@@ -31,7 +32,7 @@ public class BdQuestionsReponses implements Serializable {
         return nbReponses;
     }
 
-    public void ajouterQuestionReponse(String question, String reponse) {
+    public void ajouterQuestionReponse(String question, String reponse, ImageIcon image) {
 
         int questionIndex = 0;
 
@@ -42,7 +43,7 @@ public class BdQuestionsReponses implements Serializable {
             questionIndex = this.questions.size() - 1;
         }
 
-        this.reponses[this.nbReponses] = new Reponse(reponse);
+        this.reponses[this.nbReponses] = new Reponse(reponse, image);
         Noeud ques = new Noeud(questionIndex);
         Noeud reps = new Noeud(nbReponses);
         ques.setGauche(reps);

@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
@@ -5,10 +6,12 @@ import java.io.Serializable;
 public class Reponse implements Serializable {
     private String reponse;
     private Liste indices;
+    private ImageIcon image;
 
-    public Reponse(String reponse) {
+    public Reponse(String reponse, ImageIcon image) {
         this.reponse = reponse;
         this.indices = new Liste();
+        this.image = image;
     }
 
     public void addIndices(Character indice) {
