@@ -137,7 +137,12 @@ public class UtilitaireES {
                     bd.estVide() ? "Je ne connais rien. Entrez ce a quoi vous pensiez?" : "Je n'ai pas trouve votre reponse, Entrez a quoi vous pensiez");
             if (reponse != null && !reponse.trim().isEmpty()) { // si une r?ponse n'est pas une chaine vide ou null
                 reponse = reponse.toLowerCase();
-                if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
+                if(!bd.estVide() && reponse.equals(bd.getLaChaineActuelle())){
+
+                    JOptionPane.showMessageDialog(null,
+                            "C'est ça que j'ai dit, non?");
+                    return;
+                } else if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
 
                     JOptionPane.showMessageDialog(
                             null,
@@ -201,8 +206,8 @@ public class UtilitaireES {
             }
         }
 
-        String indiceIncorrectDonne = indiceIncorrectEstPositif ? "Oui" : "Non";
-        String indiceCorrectADonner = indiceIncorrectEstPositif ? "Non" : "Oui";
+        String indiceIncorrectDonne = indiceIncorrectEstPositif ? "Non" : "Oui";
+        String indiceCorrectADonner = indiceIncorrectEstPositif ? "Oui" : "Non";
         String questionMalRepondue = bd.getQuestions().get(chercheQuestion.getIndex());
 
         String messageErreur = reponse + " existe deja dans notre base de donnee,\n" +
