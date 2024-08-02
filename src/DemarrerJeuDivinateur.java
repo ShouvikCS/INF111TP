@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -22,6 +23,11 @@ public class DemarrerJeuDivinateur {
         JFrame cadre = new JFrame();
         cadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
         cadre.setVisible(true);
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CadreDivinateur().setVisible(true);
+//            }
+//        });
 
         // La bd qui contient les reponses, leur question
         // et les liens entre elles.

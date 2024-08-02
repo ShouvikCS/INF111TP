@@ -10,27 +10,6 @@ public abstract class PanneauOuiNon extends JPanel {
     }
 
     public abstract void ajouteComposant();
+    public abstract void ajouterEcouteur();
 }
 
-public class PanneauReponse extends PanneauOuiNon {
-
-    public PanneauReponse(BdQuestionsReponses bd, PanneauPrincipal pp) {
-        super(bd, pp);
-    }
-    @Override
-    public void ajouteComposant() {
-
-    }
-}
-
-public class PanneauQuestion extends PanneauOuiNon {
-
-    public PanneauQuestion(BdQuestionsReponses bd, PanneauPrincipal pp) {
-        super(bd, pp);
-    }
-
-    @Override
-    public void ajouteComposant() {
-
-    }
-}
