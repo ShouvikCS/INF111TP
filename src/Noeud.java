@@ -1,5 +1,7 @@
 import java.io.Serializable;
 public class Noeud implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int index;
     private Noeud gauche, droite;
     public Noeud(int index) {

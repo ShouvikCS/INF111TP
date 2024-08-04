@@ -187,14 +187,15 @@ public class UtilitaireES {
         Noeud chercheQuestion = bd.getInfoJeu().getPremier();
         boolean indiceIncorrectEstPositif = false;
 
-        for (int i = 0; i < bd.getReponses().length; i++) { // loop through elements in the Reponse[] array
-            if (bd.getReponses()[i] != null && bd.getReponses()[i].getReponse().equals(reponse)) { // if the user input reponse exists in the array already
-                Liste listReponse = bd.getReponses()[i].getIndices(); // get the list of indices of that reponse
-                int minSize = Math.min(bd.getInfoJeu().getIndicesCourants().taille(), listReponse.taille());
-                for (int j = 0; j < minSize; j++) { // loop through the list of indice
-                    if (!bd.getInfoJeu().getIndicesCourants().get(j).equals(listReponse.get(j))) { // when we find an indice that does not match
-                        for (int k = 0; k < j; k++) { // loop through the indices up until that point
-                            if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)) { // if the indice is O go left
+        for (int i = 0; i < bd.reponses.length; i++) {
+            if (bd.reponses[i] != null && bd.reponses[i].getReponse().equals(reponse) ) {
+                Liste listReponse = bd.reponses[i].getIndices();
+                int minSize = Math.min(bd.infoJeu.getIndicesCourants().taille(), listReponse.taille());
+                for (int j = 0; j < minSize; j++) {
+                    if (!bd.infoJeu.getIndicesCourants().get(j).equals(listReponse.get(j))) {
+                        for (int k = 1; k <= j ; k++) {
+                            if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)){
+//                                indiceMalRepondu = true;
                                 chercheQuestion = chercheQuestion.getGauche();
                             } else if (listReponse.get(k).equals(Constantes.REPONSE_NEGATIVE)) { // if the indice is N, go right
                                 chercheQuestion = chercheQuestion.getDroite();

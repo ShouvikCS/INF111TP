@@ -10,7 +10,6 @@ public class Liste implements Serializable {
         this.premier = this.dernier = null;
         this.nbElement = 0;
     }
-
     public Liste(Liste other) {
         this();
         ListeNoeud current = other.premier;
@@ -86,8 +85,6 @@ public class Liste implements Serializable {
         }
         return result.toString();
     }
-
-
 
     private class ListeNoeud implements Serializable{
         public Object donnee;

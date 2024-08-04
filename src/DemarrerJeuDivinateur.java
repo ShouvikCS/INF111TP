@@ -15,11 +15,16 @@ public class DemarrerJeuDivinateur {
          * les reponses et le chemin pour les retrouver.  La classe JOptionPane
          * est utilisee pour les ES ainsi que le module UtilitaireES.
          *
-         * La boucle "principale" du jeu est définie localement, les autres sont
+         * La boucle "principale" du jeu est dï¿½finie localement, les autres sont
          * dans l'utilitaireES.
          */
 
         // Pour avoir une fen?tre en fond d'?cran.
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PanneauPrincipal().setVisible(true);
+//            }
+//        });
         JFrame cadre = new JFrame();
         cadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
         cadre.setVisible(true);
