@@ -9,39 +9,44 @@ public class PanneauQuestion extends PanneauOuiNon {
 
     public PanneauQuestion(BdQuestionsReponses bd, PanneauPrincipal pp) {
         super(bd, pp);
-        this.bdQuestionsReponses = bd;
-        this.panneauPrincipal = pp;
-        ajouterEcouteur();
-    }
-
-    @Override
-    public void ajouteComposant() {
-        String question = this.bdQuestionsReponses.getLaChaineActuelle();
+        String question = (String) this.bdQuestionsReponses.getLaChaineActuelle();
         JLabel questionLabel = new JLabel(question);
-        this.add(questionLabel, BorderLayout.WEST);
-
-    }
-    @Override
-    public void ajouterEcouteur() {
-        JButton ouiButton = new JButton("Oui");
-        JButton nonButton = new JButton("Non");
-        JPanel boutonOuiNon = new JPanel();
-        boutonOuiNon.add(ouiButton);
-        boutonOuiNon.add(nonButton);
-        this.add(boutonOuiNon, BorderLayout.CENTER);
-        ouiButton.addActionListener(new ActionListener() {
+        ajouteComposant(questionLabel);
+//        Classe interne Anonyme pour écouteuroui
+        ajouterEcouteurOui(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bdQuestionsReponses.deplacerDansArbre(Constantes.REPONSE_NEGATIVE);
                 panneauPrincipal.miseAJour();
             }
         });
-        nonButton.addActionListener(new ActionListener() {
+//        Classe interne Anonyme pour écouteurNon
+        ajouterEcouteurNon(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bdQuestionsReponses.deplacerDansArbre(Constantes.REPONSE_POSITIVE);
                 panneauPrincipal.miseAJour();
             }
         });
-
     }
+// Je pense pas qu'on doit redéfinir les classe hérité de la classe parent (PanneauOUINON)! C'est pourquoi les classe interne anonyme sont le meilleur choix
+
+//    @Override
+//    public void ajouterEcouteurOui(ActionListener ecouteur) {
+//        super.ajouterEcouteurOui(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                bdQuestionsReponses.deplacerDansArbre(Constantes.REPONSE_NEGATIVE);
+//                panneauPrincipal.miseAJour();
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public void ajouterEcouteurNon(ActionListener ecouteur) {
+//        super.ajouterEcouteurNon(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                bdQuestionsReponses.deplacerDansArbre(Constantes.REPONSE_POSITIVE);
+//                panneauPrincipal.miseAJour();
+//            }
+//        });
+//    }
 
 }

@@ -124,17 +124,32 @@ public class BdQuestionsReponses implements Serializable {
         // return true if the 2 references in current noeud are null
     }
 
-    public String getLaChaineActuelle() {
-        if (infoJeu.getCourant().getDroite() == null && infoJeu.getCourant().getGauche() == null) {
+//    public String getLaChaineActuelle() {
+//        if (infoJeu.getCourant().getDroite() == null && infoJeu.getCourant().getGauche() == null) {
+//
+//            return reponses[infoJeu.getCourant().getIndex()].getReponse();
+//
+//        } else {
+//            return questions.get(infoJeu.getCourant().getIndex());
+//        }
+//        // Retourne la chaîne associée au nœud courant. Il faut
+//        // prendre l’indice et l’utiliser dans la bonne collection selon que c’est une question ou
+//        // une réponse.
+//    }
+    public Object getLaChaineActuelle(){
 
-            return reponses[infoJeu.getCourant().getIndex()].getReponse();
+        /*
+         * Stratégie : On utilise l'opérateur ternaire pour retourner la bonne
+         * chaîne qui dépend si c'est une réponse ou une question.
+         */
+        return (reponseTrouvee())
 
-        } else {
-            return questions.get(infoJeu.getCourant().getIndex());
-        }
-        // Retourne la chaîne associée au nœud courant. Il faut
-        // prendre l’indice et l’utiliser dans la bonne collection selon que c’est une question ou
-        // une réponse.
+                // Si c'est l'indice d'une réponse, il faut la description.
+                ? reponses[infoJeu.getCourant().getIndex()]
+
+                //Sinon, c'est l'indice d'une question.
+                : questions.get(infoJeu.getCourant()
+                .getIndex());
     }
 
     public boolean deplacerDansArbre(int reponse) {

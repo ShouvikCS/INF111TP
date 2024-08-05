@@ -23,27 +23,27 @@ public class UtilitaireES {
      * Affiche un bo?te de message qui explique le jeu.
      *
      **********************************/
-    public static void afficherPresentationJeu() {
-
-
-        String str = "***************************************\n" +
-                "***********JEU DU DIVINATEURS*******\n" +
-                "***************************************\n" +
-                "***************************************\n" +
-                "Il s'agit de penser a un animal, un objet ou un \n" +
-                "personnage et nous tentons de le trouver \n" +
-                "en posant des questions auxquelles \n" +
-                "vous devrez repondre par  oui ou par non.\n\n\n" +
-                "Si nous ne trouvons pas, vous pourrez nous dire ce ? \n" +
-                "quoi vous pensiez et ajouter une question qui distingue\n" +
-                "votre reponse des autres.\n\n\n" +
-                "Des mauvaises questions peuvent deranger" +
-                " le bon deroulement du jeu." +
-                "\n" +
-                "************************************";
-
-        JOptionPane.showMessageDialog(null, str);
-    }
+//    public static void afficherPresentationJeu() {
+//
+//
+//        String str = "***************************************\n" +
+//                "***********JEU DU DIVINATEURS*******\n" +
+//                "***************************************\n" +
+//                "***************************************\n" +
+//                "Il s'agit de penser a un animal, un objet ou un \n" +
+//                "personnage et nous tentons de le trouver \n" +
+//                "en posant des questions auxquelles \n" +
+//                "vous devrez repondre par  oui ou par non.\n\n\n" +
+//                "Si nous ne trouvons pas, vous pourrez nous dire ce ? \n" +
+//                "quoi vous pensiez et ajouter une question qui distingue\n" +
+//                "votre reponse des autres.\n\n\n" +
+//                "Des mauvaises questions peuvent deranger" +
+//                " le bon deroulement du jeu." +
+//                "\n" +
+//                "************************************";
+//
+//        JOptionPane.showMessageDialog(null, str);
+//    }
 
 
     /***************************
@@ -53,80 +53,80 @@ public class UtilitaireES {
      *posant les questions provenant de la base de donn?es des r?ponses et
      *en agissant selon lles indices donn?s par l'utilisateur.
      */
-    public static void demarrerDivinateur(BdQuestionsReponses bd) {
-
-        // Sert a retenir s'il reste des question.
-        boolean resteQuestion = true;
-
-        // Sert ? saisir la r?ponse de l'utilisateur.
-        int reponse = JOptionPane.OK_OPTION;
-
-        // Choisir une premi?re question dans la bd.
-        bd.choisirPremiereQuestion();
-
-        // Tant  qu'on a pas trouv? la r?ponse et qu'il reste des questions et
-        // que l'utilisateur n'appuie pas sur X.
-        while (reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
-                !bd.reponseTrouvee() && // and the 2 references left and right are not null
-                resteQuestion) { // s'il reste des question.
-
-            String[] options = {"Oui", "Non"};
-
-            String str = bd.getLaChaineActuelle();
-
-            // On pose la question courante dans l'arbre de connaissance de la bd.
-            reponse = JOptionPane.showOptionDialog(null,
-                    str + ((str.charAt(str.length() - 1) == '?') ? " " : "?"),
-                    "Jeu du divinateur",
-                    JOptionPane.CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    "Oui");
-
-            if (reponse != JOptionPane.CLOSED_OPTION) {
-
-                // On se prom?ne dans l'arbre de connaissances.
-                resteQuestion = bd.deplacerDansArbre(reponse);
-            }
-        }
-
-        // Si on est sorti de la boucle pr?c?dente c'est qu'il ne reste plus de
-        // question ou qu'on a trouv?.  Donc s'il reste des questions c'est
-        // qu'on a trouv?
-        if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
-
-            reponse = JOptionPane.showConfirmDialog(null,
-                    "La reponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
-
-            // Si l'utilisateur n'annule pas.
-            if (reponse != JOptionPane.CANCEL_OPTION &&
-                    reponse != JOptionPane.CLOSED_OPTION) {
-
-                // Si c'est oui, on a trouv?, bravo!
-                if (reponse == 0) {
-
-                    JOptionPane.showMessageDialog(null,
-                            "Bravo nous avons trouve votre reponse");
-                }
-
-                // Autrement, on demande quel est sa r?ponse.
-                else {
-
-                    demanderReponseValide(bd);
-                }
-
-            }
-        }
-
-        // Il ne reste plus de questions alors si l'utilisateur n'annule pas
-        else if (reponse != JOptionPane.CANCEL_OPTION &&
-                reponse != JOptionPane.CLOSED_OPTION) {
-
-            // On demande quel est sa r?ponse.
-            demanderReponseValide(bd);
-        }
-    }
+//    public static void demarrerDivinateur(BdQuestionsReponses bd) {
+//
+//        // Sert a retenir s'il reste des question.
+//        boolean resteQuestion = true;
+//
+//        // Sert ? saisir la r?ponse de l'utilisateur.
+//        int reponse = JOptionPane.OK_OPTION;
+//
+//        // Choisir une premi?re question dans la bd.
+//        bd.choisirPremiereQuestion();
+//
+//        // Tant  qu'on a pas trouv? la r?ponse et qu'il reste des questions et
+//        // que l'utilisateur n'appuie pas sur X.
+//        while (reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
+//                !bd.reponseTrouvee() && // and the 2 references left and right are not null
+//                resteQuestion) { // s'il reste des question.
+//
+//            String[] options = {"Oui", "Non"};
+//
+//            String str = bd.getLaChaineActuelle();
+//
+//            // On pose la question courante dans l'arbre de connaissance de la bd.
+//            reponse = JOptionPane.showOptionDialog(null,
+//                    str + ((str.charAt(str.length() - 1) == '?') ? " " : "?"),
+//                    "Jeu du divinateur",
+//                    JOptionPane.CANCEL_OPTION,
+//                    JOptionPane.QUESTION_MESSAGE,
+//                    null,
+//                    options,
+//                    "Oui");
+//
+//            if (reponse != JOptionPane.CLOSED_OPTION) {
+//
+//                // On se prom?ne dans l'arbre de connaissances.
+//                resteQuestion = bd.deplacerDansArbre(reponse);
+//            }
+//        }
+//
+//        // Si on est sorti de la boucle pr?c?dente c'est qu'il ne reste plus de
+//        // question ou qu'on a trouv?.  Donc s'il reste des questions c'est
+//        // qu'on a trouv?
+//        if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
+//
+//            reponse = JOptionPane.showConfirmDialog(null,
+//                    "La reponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
+//
+//            // Si l'utilisateur n'annule pas.
+//            if (reponse != JOptionPane.CANCEL_OPTION &&
+//                    reponse != JOptionPane.CLOSED_OPTION) {
+//
+//                // Si c'est oui, on a trouv?, bravo!
+//                if (reponse == 0) {
+//
+//                    JOptionPane.showMessageDialog(null,
+//                            "Bravo nous avons trouve votre reponse");
+//                }
+//
+//                // Autrement, on demande quel est sa r?ponse.
+//                else {
+//
+//                    demanderReponseValide(bd);
+//                }
+//
+//            }
+//        }
+//
+//        // Il ne reste plus de questions alors si l'utilisateur n'annule pas
+//        else if (reponse != JOptionPane.CANCEL_OPTION &&
+//                reponse != JOptionPane.CLOSED_OPTION) {
+//
+//            // On demande quel est sa r?ponse.
+//            demanderReponseValide(bd);
+//        }
+//    }
 
     public static void demanderReponseValide(BdQuestionsReponses bd) {
         String reponse = null;

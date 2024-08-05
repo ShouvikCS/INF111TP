@@ -13,12 +13,6 @@ public class Reponse implements Serializable {
         this.indices = new Liste();
         this.image = image;
     }
-//    to convert getLachaineActuelle(String) to Classe Reponse
-    public static Reponse convertToString(String reponse, String cheminImage) {
-        String rep = reponse.trim();
-        ImageIcon image = new ImageIcon(cheminImage);
-        return new Reponse(rep, image);
-    }
 
     public void addIndices(Character indice) {
         this.indices.enfiler(indice);
