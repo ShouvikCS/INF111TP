@@ -1,7 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ecouteur implements ActionListener {
+public class EcouteurNon implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {

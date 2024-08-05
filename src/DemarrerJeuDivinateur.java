@@ -22,7 +22,13 @@ public class DemarrerJeuDivinateur {
         // Pour avoir une fen?tre en fond d'?cran.
         JFrame cadre = new JFrame();
         cadre.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        PanneauQuestion panneauTemp =  new PanneauQuestion(new BdQuestionsReponses(), 3);
+        panneauTemp.ajouteComposant();
+        cadre.add(panneauTemp);
         cadre.setVisible(true);
+
+
+
 //        EventQueue.invokeLater(new Runnable() {
 //            public void run() {
 //                new CadreDivinateur().setVisible(true);
@@ -56,10 +62,10 @@ public class DemarrerJeuDivinateur {
         // Tant que l'utilisateur veut jouer (il n'a pas annul?)
         while(reponse == JOptionPane.OK_OPTION){
 
-            // On d?marre la partie.
+             //On d?marre la partie.
             UtilitaireES.demarrerDivinateur(bd);
 
-            // On demande s'il veut rejouer.
+             //On demande s'il veut rejouer.
             reponse =
                     JOptionPane.showConfirmDialog(null,
                             "Voulez-vous rejouez  ?");
