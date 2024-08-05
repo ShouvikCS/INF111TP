@@ -14,6 +14,7 @@ public class CadreDivinateur extends JFrame implements Runnable {
         initialiserComposant();
         setVisible(true);
         UtilitaireES.demanderReponseValide(this.bd);
+        this.setBd(bd);
     }
 
     private void configurerFenetrePrincipale() {

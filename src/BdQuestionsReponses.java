@@ -17,6 +17,7 @@ public class BdQuestionsReponses implements Serializable {
         this.nbReponses = 0;
     }
 
+
     public List<String> getQuestions() {
         return questions;
     }
@@ -97,6 +98,41 @@ public class BdQuestionsReponses implements Serializable {
         }
         return false;
     }
+//    verifie si la reponse Existe et retourne la reponse (copié dans BDquestionReponse fournie par le prof)
+    public Reponse getReponse(String reponse){
+        /*
+         * Stratégie : Fouille linéaire.  On récupère une Reponse à la fois et
+         * on compare l'attribut reponse à la réponse reçue.  La boucle se
+         * termine si la collection est parcourue au complet ou que la réponse
+         * a été trouvée.
+         */
+
+        int i = 0;
+
+        int taille = nbReponses;
+        Reponse r = null;
+
+        if(taille != 0){
+
+            r = reponses[i];
+
+            while(i < taille && !r.getReponse().equals(reponse)){
+                i++;
+                if(i < taille){
+                    r = reponses[i];
+                }
+
+                else {
+                    r = null;
+                }
+            }
+
+        }
+
+        // Autrement dit :: Si la taille du tableau de réponse est de 0 ou que i
+        // == taile, c'est que la réponse n'existe pas.
+        return r;
+    }
 
 
     public boolean estVide() {
@@ -109,13 +145,6 @@ public class BdQuestionsReponses implements Serializable {
         infoJeu.setPrecedent(null);
         infoJeu.emptyIndiceCourrante();
 
-        //Cette procédure place la référence nœud courant
-        //du type-enregistrement InfoJeu sur le premier nœud. La dernière réponse de
-        //l’utilisateur est mise à faux et la référence sur le nœud précédent est mise à nulle.
-        //Nous ajoutons à cela une liste instanciée mais vide pour recueillir les indices donnés
-        //par l’utilisateur. Elle est utilisée au moment de trouver une erreur de l’utilisateur. Il
-        //faut retenir les ‘O’ et ‘N’ de l’utilisateur. Vous pouvez utiliser les constantes définies
-        //et prévues à cet effet.
     }
 
     public boolean reponseTrouvee() {
@@ -123,19 +152,7 @@ public class BdQuestionsReponses implements Serializable {
         return infoJeu.getCourant().getDroite() == null && infoJeu.getCourant().getGauche() == null;
         // return true if the 2 references in current noeud are null
     }
-
-//    public String getLaChaineActuelle() {
-//        if (infoJeu.getCourant().getDroite() == null && infoJeu.getCourant().getGauche() == null) {
-//
-//            return reponses[infoJeu.getCourant().getIndex()].getReponse();
-//
-//        } else {
-//            return questions.get(infoJeu.getCourant().getIndex());
-//        }
-//        // Retourne la chaîne associée au nœud courant. Il faut
-//        // prendre l’indice et l’utiliser dans la bonne collection selon que c’est une question ou
-//        // une réponse.
-//    }
+// Modification de la methode getLachaineActuelle
     public Object getLaChaineActuelle(){
 
         /*

@@ -52,7 +52,7 @@ public class PanneauPrincipal extends JPanel {
 //        Ajout des deux boutons du bas
         JPanel panneauBas = new JPanel();
         panneauBas.setLayout(new BorderLayout());
-        JButton retourButton = new JButton("Retour");
+        JButton retourButton = new JButton("<< Retour");
         JButton consulterReponsesBDButton = new JButton("Consulter Réponses");
         panneauBas.add(retourButton, BorderLayout.WEST);
         panneauBas.add(consulterReponsesBDButton, BorderLayout.EAST);

@@ -15,168 +15,138 @@ import javax.swing.*;
 
 public class UtilitaireES {
 
-    static Scanner clavier = new Scanner(System.in);
+    // methode  DemanderReponseValide écrite pas nous même a été mis en Commentaire
 
-    /**********************************
-     * AFFICHER PRESENTATION DU JEU
-     *
-     * Affiche un bo?te de message qui explique le jeu.
-     *
-     **********************************/
-//    public static void afficherPresentationJeu() {
+//    public static void demanderReponseValide1(BdQuestionsReponses bd) {
+//        String reponse = null;
+//        String question = null;
 //
-//
-//        String str = "***************************************\n" +
-//                "***********JEU DU DIVINATEURS*******\n" +
-//                "***************************************\n" +
-//                "***************************************\n" +
-//                "Il s'agit de penser a un animal, un objet ou un \n" +
-//                "personnage et nous tentons de le trouver \n" +
-//                "en posant des questions auxquelles \n" +
-//                "vous devrez repondre par  oui ou par non.\n\n\n" +
-//                "Si nous ne trouvons pas, vous pourrez nous dire ce ? \n" +
-//                "quoi vous pensiez et ajouter une question qui distingue\n" +
-//                "votre reponse des autres.\n\n\n" +
-//                "Des mauvaises questions peuvent deranger" +
-//                " le bon deroulement du jeu." +
-//                "\n" +
-//                "************************************";
-//
-//        JOptionPane.showMessageDialog(null, str);
-//    }
-
-
-    /***************************
-     * DEMARRER DIVINATEUR
-     *************************
-     *Permet l'interaction avec l'utilisateur en
-     *posant les questions provenant de la base de donn?es des r?ponses et
-     *en agissant selon lles indices donn?s par l'utilisateur.
-     */
-//    public static void demarrerDivinateur(BdQuestionsReponses bd) {
-//
-//        // Sert a retenir s'il reste des question.
-//        boolean resteQuestion = true;
-//
-//        // Sert ? saisir la r?ponse de l'utilisateur.
-//        int reponse = JOptionPane.OK_OPTION;
-//
-//        // Choisir une premi?re question dans la bd.
-//        bd.choisirPremiereQuestion();
-//
-//        // Tant  qu'on a pas trouv? la r?ponse et qu'il reste des questions et
-//        // que l'utilisateur n'appuie pas sur X.
-//        while (reponse != JOptionPane.CLOSED_OPTION && // the window isn't closed
-//                !bd.reponseTrouvee() && // and the 2 references left and right are not null
-//                resteQuestion) { // s'il reste des question.
-//
-//            String[] options = {"Oui", "Non"};
-//
-//            String str = bd.getLaChaineActuelle();
-//
-//            // On pose la question courante dans l'arbre de connaissance de la bd.
-//            reponse = JOptionPane.showOptionDialog(null,
-//                    str + ((str.charAt(str.length() - 1) == '?') ? " " : "?"),
-//                    "Jeu du divinateur",
-//                    JOptionPane.CANCEL_OPTION,
-//                    JOptionPane.QUESTION_MESSAGE,
+//        while (true) { // force une reponse si la bd est vide
+//            reponse = JOptionPane.showInputDialog(
 //                    null,
-//                    options,
-//                    "Oui");
-//
-//            if (reponse != JOptionPane.CLOSED_OPTION) {
-//
-//                // On se prom?ne dans l'arbre de connaissances.
-//                resteQuestion = bd.deplacerDansArbre(reponse);
-//            }
-//        }
-//
-//        // Si on est sorti de la boucle pr?c?dente c'est qu'il ne reste plus de
-//        // question ou qu'on a trouv?.  Donc s'il reste des questions c'est
-//        // qu'on a trouv?
-//        if (resteQuestion && reponse != JOptionPane.CLOSED_OPTION) {
-//
-//            reponse = JOptionPane.showConfirmDialog(null,
-//                    "La reponse est " + bd.getLaChaineActuelle() + "; Est-ce exact ?");
-//
-//            // Si l'utilisateur n'annule pas.
-//            if (reponse != JOptionPane.CANCEL_OPTION &&
-//                    reponse != JOptionPane.CLOSED_OPTION) {
-//
-//                // Si c'est oui, on a trouv?, bravo!
-//                if (reponse == 0) {
+//                    bd.estVide() ? "Je ne connais rien. Entrez ce a quoi vous pensiez?" : "Je n'ai pas trouve votre reponse, Entrez a quoi vous pensiez");
+//            if (reponse != null && !reponse.trim().isEmpty()) { // si une r?ponse n'est pas une chaine vide ou null
+//                reponse = reponse.toLowerCase();
+//                if(!bd.estVide() && reponse.equals(bd.getLaChaineActuelle())){
 //
 //                    JOptionPane.showMessageDialog(null,
-//                            "Bravo nous avons trouve votre reponse");
+//                            "C'est ça que j'ai dit, non?");
+//                    return;
+//                } else if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
+//
+//                    JOptionPane.showMessageDialog(
+//                            null,
+//                            messageErreur(bd, reponse));
+//
+//                    return; // exit method, which restarts game
 //                }
 //
-//                // Autrement, on demande quel est sa r?ponse.
-//                else {
+//                // demande pour une question
+//                while (true) { // force une question si la bd est vide
+//                    question = JOptionPane.showInputDialog(
+//                            null,
+//                            "Entrez une question concernant votre objet ou votre animal qui le distingue: ");
 //
-//                    demanderReponseValide(bd);
+//                    if (question != null && !question.trim().isEmpty()) { // si la question n'est pas une chaine vide ou null
+//                        question = question.toLowerCase();
+//                        String nomFicImage = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.OUVRE, "jpg");
+//                        bd.ajouterQuestionReponse(question, reponse, new ImageIcon(nomFicImage));
+//                        UtilitaireFichier.sauvegarde(bd, Constantes.NOM_FICHIER_BD);
+//                        break;                    } else if (question == null) {
+//                        if (!bd.estVide()) {
+//                            break;
+//                        } else {
+//                            System.exit(0);
+//                        }
+//                    }
 //                }
-//
+//                break;
+//            } else if (reponse == null) { // if cancel is pressed, reponse returns null
+//                if (!bd.estVide()) { // if the bd had answers, simply exit loop
+//                    break;
+//                } else { // if the bd was empty, exit program, forces the user to put initial data into the db next launch
+//                    System.exit(0);
+//                }
 //            }
-//        }
-//
-//        // Il ne reste plus de questions alors si l'utilisateur n'annule pas
-//        else if (reponse != JOptionPane.CANCEL_OPTION &&
-//                reponse != JOptionPane.CLOSED_OPTION) {
-//
-//            // On demande quel est sa r?ponse.
-//            demanderReponseValide(bd);
 //        }
 //    }
 
+//    Celle fourni par le prof dans UtilitaireES TP2
     public static void demanderReponseValide(BdQuestionsReponses bd) {
-        String reponse = null;
-        String question = null;
 
-        while (true) { // force une reponse si la bd est vide
-            reponse = JOptionPane.showInputDialog(
-                    null,
-                    bd.estVide() ? "Je ne connais rien. Entrez ce a quoi vous pensiez?" : "Je n'ai pas trouve votre reponse, Entrez a quoi vous pensiez");
-            if (reponse != null && !reponse.trim().isEmpty()) { // si une r?ponse n'est pas une chaine vide ou null
-                reponse = reponse.toLowerCase();
-                if(!bd.estVide() && reponse.equals(bd.getLaChaineActuelle())){
+        // Pour obtenir la réponse de l'utilisateur.
+        String reponse;
 
-                    JOptionPane.showMessageDialog(null,
-                            "C'est ça que j'ai dit, non?");
-                    return;
-                } else if (bd.reponseExiste(reponse)) { // si la reponse existe deja dans la bd
+        // Mettre un message distinctif si la bd est vide ou non.
+        if(bd.estVide()){
 
-                    JOptionPane.showMessageDialog(
-                            null,
-                            messageErreur(bd, reponse));
+            //JOptionPane.showMessageDialog(null, "La base de données est vide");
+            // On demande une réponse.
+            reponse =
+                    JOptionPane.showInputDialog("Je ne connais rien, " +
+                            " Entrez ce à quoi vous pensiez ? : ");
+        }
 
-                    return; // exit method, which restarts game
+        else{
+
+            // On demande une réponse parce qu'on n'a pas trouvé la réponse.
+            reponse =
+                    JOptionPane.showInputDialog("Je n'ai pas trouvé" +
+                            " votre réponse,  Entrez ce à quoi vous pensiez ? : ");
+        }
+
+        // L'utilisateur n'a pas annulé.
+        if(reponse != null && !reponse.equals("")){
+
+            reponse = reponse.toLowerCase();
+
+            // S'il nous répéte ce qu'on vient de lui montrer.
+            if(!bd.estVide() && reponse.equals(bd.getLaChaineActuelle())){
+
+                JOptionPane.showMessageDialog(null,
+                        "C'est ça que j'ai dit, non ????");
+
+            }
+            else{
+
+                // Si la réponse  existe,  repUtilisateur sera différent de null.
+                Reponse repUtilisateur = bd.getReponse(reponse);
+
+                if (repUtilisateur != null) {
+
+                    // On affiche la réponse et le message qui indique l'erreur.
+                    JOptionPane.showMessageDialog(null,  repUtilisateur.getReponse() +
+                            " existe déjà dans notre banque de donnée, " +
+                            messageErreur(bd,reponse));
+
                 }
+                else {
 
-                // demande pour une question
-                while (true) { // force une question si la bd est vide
-                    question = JOptionPane.showInputDialog(
-                            null,
-                            "Entrez une question concernant votre objet ou votre animal qui le distingue: ");
+                    // Il faut une question pour accompagner la réponse.
+                    String question =
+                            JOptionPane.showInputDialog("Entrez une question " +
+                                    " concernant votre objet ou votre animal" +
+                                    " qui le distingue  : ");
 
-                    if (question != null && !question.trim().isEmpty()) { // si la question n'est pas une chaine vide ou null
-                        question = question.toLowerCase();
-                        String nomFicImage = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.OUVRE, "jpg");
-                        bd.ajouterQuestionReponse(question, reponse, new ImageIcon(nomFicImage));
-                        UtilitaireFichier.sauvegarde(bd, Constantes.NOM_FICHIER_BD);
-                        break;                    } else if (question == null) {
-                        if (!bd.estVide()) {
-                            break;
-                        } else {
-                            System.exit(0);
-                        }
+                    // Si l'utilisateur n'a pas annulé, on ajoute la réponse et sa
+                    // question à la bd.
+                    if(question != null && !question.equals("")){
+
+                        // On veut un standard pour les questions
+                        // avec une majuscule en commençant et en minusule pour
+                        // le reste.  Les étudiants sauvegardent le tout en minuscule.
+                        String chaine = question.toString().toLowerCase();
+                        StringBuffer str = new StringBuffer(chaine);
+                        str.setCharAt(0, Character.toUpperCase(str.charAt(0)));
+
+
+                        String nomFicImage =
+                                UtilitaireFichier.nomFichierValide("",
+                                        UtilitaireFichier.OUVRE, "jpg");
+
+                        bd.ajouterQuestionReponse(reponse, str.toString(),
+                                new ImageIcon(nomFicImage));
                     }
-                }
-                break;
-            } else if (reponse == null) { // if cancel is pressed, reponse returns null
-                if (!bd.estVide()) { // if the bd had answers, simply exit loop
-                    break;
-                } else { // if the bd was empty, exit program, forces the user to put initial data into the db next launch
-                    System.exit(0);
                 }
             }
         }
