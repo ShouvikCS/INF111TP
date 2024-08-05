@@ -18,7 +18,7 @@ public class PanneauQuestion extends PanneauOuiNon {
     public void ajouteComposant() {
         String question = this.bdQuestionsReponses.getLaChaineActuelle();
         JLabel questionLabel = new JLabel(question);
-        this.add(questionLabel);
+        this.add(questionLabel, BorderLayout.WEST);
 
     }
     @Override
@@ -28,7 +28,7 @@ public class PanneauQuestion extends PanneauOuiNon {
         JPanel boutonOuiNon = new JPanel();
         boutonOuiNon.add(ouiButton);
         boutonOuiNon.add(nonButton);
-        this.add(boutonOuiNon, BorderLayout.SOUTH);
+        this.add(boutonOuiNon, BorderLayout.CENTER);
         ouiButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bdQuestionsReponses.deplacerDansArbre(Constantes.REPONSE_NEGATIVE);

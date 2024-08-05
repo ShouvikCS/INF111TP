@@ -13,7 +13,6 @@ public class PanneauPrincipal extends JPanel {
         this.cadreDivinateur = cadre;
         this.bd = cadre.getBd();
         initComposants();
-//        creerPanCentral();
     }
 
     public void initComposants() {
@@ -68,7 +67,6 @@ public class PanneauPrincipal extends JPanel {
                 // à implémenter dans la partie 2
             }
         });
-
     }
     public void miseAJour() {
 

@@ -17,14 +17,12 @@ public class PanneauReponse extends PanneauOuiNon {
     public void ajouteComposant() {
 //   Faudrait transtyper le retour de getLachaineActuelle tel que démander dans l'énoncé du projet! don't know how to do this!
 //        I'D tried this but it doesn't work
-//        Reponse reponse = (Reponse)this.questionsReponses.getLaChaineActuelle();
-        String reponse = this.questionsReponses.getLaChaineActuelle();
-//        Reponse reponse = new Reponse(rep,)
-        JLabel reponseLabel = new JLabel(reponse);
-//        JLabel imageLabel = new JLabel(reponse.getImage());
-        this.add(reponseLabel, BorderLayout.NORTH);
-//        this.add(imageLabel, BorderLayout.CENTER);
-
+        String rep = this.questionsReponses.getLaChaineActuelle();
+        Reponse reponse = Reponse.convertToString(rep, rep);
+        JLabel reponseLabel = new JLabel(reponse.getReponse());
+        JLabel imageLabel = new JLabel(reponse.getImage());
+        this.add(reponseLabel, BorderLayout.WEST);
+        this.add(imageLabel, BorderLayout.SOUTH);
     }
 
     @Override
@@ -34,7 +32,7 @@ public class PanneauReponse extends PanneauOuiNon {
         JPanel ouiNonPanel = new JPanel();
         ouiNonPanel.add(ouiButton);
         ouiNonPanel.add(nonButton);
-        this.add(ouiNonPanel, BorderLayout.SOUTH);
+        this.add(ouiNonPanel, BorderLayout.CENTER);
         ouiButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Bonne Reponse Trouvé!");
