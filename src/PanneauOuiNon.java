@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.Border;
 
-public  class PanneauOuiNon extends JPanel implements ActionListener {
-    private BdQuestionsReponses bd;
-    private PanneauPrincipal pp;
-    private JButton boutonOui;
-    private JButton boutonNon;
+public  class PanneauOuiNon extends JPanel{
+    protected BdQuestionsReponses bd;
+    protected PanneauPrincipal pp;
+    protected JButton boutonOui;
+    protected JButton boutonNon;
 
     public PanneauOuiNon(BdQuestionsReponses bd, PanneauPrincipal pp) {
         this.bd = bd;
@@ -24,7 +24,6 @@ public  class PanneauOuiNon extends JPanel implements ActionListener {
 //        Création des bouton
         boutonOui = new JButton("Oui");
         boutonNon = new JButton("Non");
-        boutonOui.addActionListener(this);
         sousPanneau.add(boutonOui);
         sousPanneau.add(Box.createRigidArea(new Dimension(5, 0)));
         sousPanneau.add(boutonNon);
@@ -51,12 +50,5 @@ public  class PanneauOuiNon extends JPanel implements ActionListener {
         boutonNon.addActionListener(ecouteur);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Hello");
-
-//        bd.deplacerDansArbre(Constantes.REPONSE_POSITIVE);
-        pp.miseAJour();
-    }
 }
 

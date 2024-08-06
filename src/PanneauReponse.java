@@ -4,32 +4,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanneauReponse extends PanneauOuiNon {
-    private BdQuestionsReponses questionsReponses;
-    private PanneauPrincipal panneauPrincipal;
 
     public PanneauReponse(BdQuestionsReponses bd, PanneauPrincipal pp) {
         super(bd, pp);
-        Reponse reponse = (Reponse)this.questionsReponses.getLaChaineActuelle();
-        JLabel reponseLabel = new JLabel(reponse.getReponse());
-        JLabel imageLabel = new JLabel(reponse.getImage());
-        JLabel reponseImageLabel = new JLabel();
+        Reponse reponse = (Reponse)this.bd.getLaChaineActuelle();
+        ImageIcon imageIcon = reponse.getImage();
+
+        JLabel reponseLabel = new JLabel(reponse.getReponse(), imageIcon, JLabel.CENTER);
+        reponseLabel.setAlignmentX(CENTER_ALIGNMENT);
+        reponseLabel.setForeground(Color.red);
+        //reponseLabel.getFontMetrics();
+        reponseLabel.setVerticalTextPosition(JLabel.TOP);
+        reponseLabel.setHorizontalTextPosition(JLabel.CENTER);
+       // setFont(reponseLabel.getFont().deriveFont(64.0f));
 //        La position de l'image et de la reponse et ainsi que la disposition utilisé sera revu...
 
-        reponseImageLabel.setLayout(new GridLayout(2, 1));
-        reponseImageLabel.add(reponseLabel);
-        reponseImageLabel.add(imageLabel);
 //        Ajout du composant au panneauOuiNon
-        ajouteComposant(reponseImageLabel);
+        ajouteComposant(reponseLabel);
 //        Classe Anonyme pour les écouteurs
         ajouterEcouteurOui(e -> {
             JOptionPane.showMessageDialog(null, "Bonne Reponse Trouvé!");
-            questionsReponses.choisirPremiereQuestion();
-            panneauPrincipal.miseAJour();
+            bd.choisirPremiereQuestion();
+            pp.miseAJour();
         });
 
         ajouterEcouteurNon(e -> {
-            UtilitaireES.demanderReponseValide(questionsReponses);
-            panneauPrincipal.miseAJour();
+            UtilitaireES.demanderReponseValide(bd);
+            bd.choisirPremiereQuestion();
+            pp.miseAJour();
         });
 
     }

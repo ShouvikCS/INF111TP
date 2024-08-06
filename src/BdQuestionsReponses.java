@@ -172,9 +172,9 @@ public class BdQuestionsReponses implements Serializable {
     public boolean deplacerDansArbre(int reponse) {
         if (reponse == 0) { // Oui = 0; Non = 1
 
-            infoJeu.addIndiceCourrante(Constantes.REPONSE_POSITIVE);
-            infoJeu.setDerniereQuestionPositive(true);
-            infoJeu.setCourant(infoJeu.getCourant().getGauche());
+            infoJeu.addIndiceCourrante(Constantes.REPONSE_POSITIVE); // add indice to list
+            infoJeu.setDerniereQuestionPositive(true); // set last answer to be true
+            infoJeu.setCourant(infoJeu.getCourant().getGauche()); // set noeud courant to be the left ref on current one
             return true;
 
         } else {
