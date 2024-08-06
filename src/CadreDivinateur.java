@@ -7,13 +7,15 @@ public class CadreDivinateur extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        this.bd = new BdQuestionsReponses();
+        this.bd = UtilitaireFichier.obtenirBd();
         this.pp = new PanneauPrincipal(this);
         setContentPane(this.pp);
         configurerFenetrePrincipale();
         initialiserComposant();
         setVisible(true);
-        UtilitaireES.demanderReponseValide(this.bd);
+        if (bd.estVide()) {
+            UtilitaireES.demanderReponseValide(this.bd);
+        }
         this.setBd(bd);
     }
 

@@ -144,7 +144,7 @@ public class UtilitaireES {
                                 UtilitaireFichier.nomFichierValide("",
                                         UtilitaireFichier.OUVRE, "jpg");
 
-                        bd.ajouterQuestionReponse(reponse, str.toString(),
+                        bd.ajouterQuestionReponse(str.toString(), reponse,
                                 new ImageIcon(nomFicImage));
                     }
                 }
