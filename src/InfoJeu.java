@@ -12,6 +12,15 @@ public class InfoJeu implements Serializable {
         this.derniereQuestionPositive = false;
         this.indicesCourrantes = new Liste();
     }
+
+    public InfoJeu(InfoJeu infoJeu){
+        this.premier = infoJeu.premier;
+        this.courant = infoJeu.courant;
+        this.precedent = infoJeu.precedent;
+        this.derniereQuestionPositive = infoJeu.derniereQuestionPositive;
+        this.indicesCourrantes = infoJeu.indicesCourrantes;
+    }
+
     public Noeud getPremier() {
         return premier;
     }

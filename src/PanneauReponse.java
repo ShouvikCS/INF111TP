@@ -13,10 +13,8 @@ public class PanneauReponse extends PanneauOuiNon {
         JLabel reponseLabel = new JLabel(reponse.getReponse(), imageIcon, JLabel.CENTER);
         reponseLabel.setAlignmentX(CENTER_ALIGNMENT);
         reponseLabel.setForeground(Color.red);
-        //reponseLabel.getFontMetrics();
         reponseLabel.setVerticalTextPosition(JLabel.TOP);
         reponseLabel.setHorizontalTextPosition(JLabel.CENTER);
-       // setFont(reponseLabel.getFont().deriveFont(64.0f));
 //        La position de l'image et de la reponse et ainsi que la disposition utilisé sera revu...
 
 //        Ajout du composant au panneauOuiNon

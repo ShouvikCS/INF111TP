@@ -8,6 +8,7 @@ public class BdQuestionsReponses implements Serializable {
     private int nbReponses;
     private String nomFic = Constantes.NOM_FICHIER_BD;
     public InfoJeu infoJeu;
+    public ArrayList<InfoJeu> infosPrevious;
 
 
     public BdQuestionsReponses() {
@@ -86,6 +87,15 @@ public class BdQuestionsReponses implements Serializable {
         UtilitaireFichier.sauvegarde(this, nomFic);
 
     }
+
+    public void retourQuestion() {
+        if (infoJeu.getPrecedent() != null){
+            infoJeu = infosPrevious.getLast();
+            infosPrevious.removeLast();
+            System.out.println(infoJeu.getCourant().getIndex());
+        }
+    }
+
     // Verifie si la reponse existe dans tableau de reponse
     public boolean reponseExiste(String reponse) {
         for (int i = 0; i < this.reponses.length; i++) {
@@ -144,7 +154,7 @@ public class BdQuestionsReponses implements Serializable {
         infoJeu.setDerniereQuestionPositive(false);
         infoJeu.setPrecedent(null);
         infoJeu.emptyIndiceCourrante();
-
+        infosPrevious = new ArrayList<>();
     }
 
     public boolean reponseTrouvee() {
@@ -170,6 +180,8 @@ public class BdQuestionsReponses implements Serializable {
     }
 
     public boolean deplacerDansArbre(int reponse) {
+
+        infosPrevious.add(new InfoJeu(infoJeu));
         if (reponse == 0) { // Oui = 0; Non = 1
 
             infoJeu.addIndiceCourrante(Constantes.REPONSE_POSITIVE); // add indice to list
@@ -190,6 +202,7 @@ public class BdQuestionsReponses implements Serializable {
                 infoJeu.setCourant(infoJeu.getCourant().getDroite());
                 return true;
             }
+
         }
 
         //Cette procédure reçoit l’indice de l’utilisateur (O ou

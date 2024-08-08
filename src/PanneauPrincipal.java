@@ -53,18 +53,22 @@ public class PanneauPrincipal extends JPanel {
         JPanel panneauBas = new JPanel();
         panneauBas.setLayout(new BorderLayout());
         JButton retourButton = new JButton("<< Retour");
+
         JButton consulterReponsesBDButton = new JButton("Consulter Réponses");
         panneauBas.add(retourButton, BorderLayout.WEST);
         panneauBas.add(consulterReponsesBDButton, BorderLayout.EAST);
         this.add(panneauBas, BorderLayout.SOUTH);
         retourButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                // à implémenter dans la partie 2
+                bd.retourQuestion();
+                miseAJour();
             }
         });
         consulterReponsesBDButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // à implémenter dans la partie 2
+                ConsultationReponses consultationReponses = new ConsultationReponses(bd);
+                consultationReponses.openConsultation();
             }
         });
     }
