@@ -1,21 +1,26 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class CadreDivinateur extends JFrame implements Runnable {
     private BdQuestionsReponses bd;
     private PanneauPrincipal pp;
+    private Menu menuBar;
 
     @Override
     public void run() {
-        this.bd = UtilitaireFichier.obtenirBd();
+        try {
+            this.bd = UtilitaireFichier.obtenirBd(new FileInputStream(Constantes.NOM_FICHIER_BD));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         this.pp = new PanneauPrincipal(this);
+        this.menuBar = new Menu(this);
         setContentPane(this.pp);
         configurerFenetrePrincipale();
-        initialiserComposant();
         setVisible(true);
-        if (bd.estVide()) {
-            UtilitaireES.demanderReponseValide(this.bd);
-        }
         this.setBd(bd);
     }
 
@@ -24,22 +29,7 @@ public class CadreDivinateur extends JFrame implements Runnable {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Akinator");
     }
-    private void initialiserComposant() {
-        //        Creation du menu
-        JMenuBar mb = new JMenuBar();
-        JMenu mnFile = new JMenu("Fichier");
-        JMenuItem mntmNew = new JMenuItem("Nouveau");
-        JMenuItem mntmOpen = new JMenuItem("Ouvrir");
-        JMenuItem mntmSave = new JMenuItem("Sauvegarder");
-        JMenuItem mntmExit = new JMenuItem("Quitter");
-        mnFile.add(mntmNew);
-        mnFile.add(mntmOpen);
-        mnFile.add(mntmSave);
-        mnFile.add(mntmExit);
-        mb.add(mnFile);
-        this.setJMenuBar(mb);
 
-    }
     public BdQuestionsReponses getBd(){
         return bd;
     }
@@ -47,5 +37,8 @@ public class CadreDivinateur extends JFrame implements Runnable {
         this.bd = bd;
         this.bd.choisirPremiereQuestion();
         this.pp.miseAJour();
+    }
+    public void setBdName(String nom){
+        this.bd.bdName(nom);
     }
 }
