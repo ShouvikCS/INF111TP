@@ -5,14 +5,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import javax.swing.*;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-
+/**
+ * Classe utilitaire pour la récupération et la sauvegarde de la bd
+ * dans le jeu dedinateur (voir énoncé tp3 partie 3).
+ *
+ * @author Pierre Bélisle
+ * @version (Copyright 2017)
+ *
+ * Tout le code a été écrit par l'auteur pour l'École de technologie supérieure
+ * de montréal (Éts).  Toute utilisation ou reproduction, en tout ou en partie,
+ * doit mentionner l'école et l'auteur.
+ *
+ */
 public class UtilitaireFichier {
 
     // Mode d'ouverture possible du fileChooser.
@@ -20,11 +31,9 @@ public class UtilitaireFichier {
     public static final int OUVRE = 0;
     public static final int SAUVE = 1;
 
-    // Traduction
+    // String utilisée par défaut.
     public static final String NOM_EXTENSION = "bin";
     public static final String NOM_FIC_DEFAULT = "aucune bd";
-
-    static String nomFic = null;
 
     /**
      * SAISIR NOM FICHIER VALIDE
@@ -64,11 +73,11 @@ public class UtilitaireFichier {
             //On affiche la fenêtre de dialogue et on attend la réponse.
             int returnVal;
 
-            // En node ouverture.
+            // En mode ouverture.
             if(mode == OUVRE)
                 returnVal = fc.showOpenDialog(null);
 
-                // Ou en mode sauvegarde.
+                // Ou en mode sauvegarde (SAUVE).
             else{
 
                 fc.setSelectedFile(new File(filtre+ "." + extension));
@@ -85,6 +94,7 @@ public class UtilitaireFichier {
                 valide = extensionValide(filtre,"."+extension);
 
                 if(valide){
+
                     //On change le répertoire courant par celui du fichier qui vient d'être lu
                     System.setProperty("user.dir",fc.getSelectedFile().getParent());
                 }
@@ -127,7 +137,7 @@ public class UtilitaireFichier {
 
 
     /**
-     * Méthode privée pour éviter la répétition de code.  Retourne le fichier
+     * Méthode qui retourne le fichier
      * sélectionné pas l'utilisateur ou null.
      *
      * @param nomFiltre Permet de montrer juste les extensions désirées.
@@ -165,23 +175,20 @@ public class UtilitaireFichier {
     }
 
     /**
-     * Tente d'ouvrir le fichier NOM_FICHIER_BD.  S'il n'existe pas,
+     * Tente d'ouvrir le fichier contenu dans le stream reçu.  S'il n'existe pas,
      * la bd est vide.
      */
-    public static BdQuestionsReponses obtenirBd(){
+    public static BdQuestionsReponses obtenirBd(FileInputStream fic){
 
         /*
-         * Strat?gie : On utilise  un FileInputStream qui permet de lire
-         * la bd d'un coup, (comme elle a ?t? sauvegard?e).
+         * Stratégie : On utilise  un FileInputStream qui permet de lire
+         * la bd d'un coup, (comme elle a été sauvegardée).
          */
-        FileInputStream fic;
         BdQuestionsReponses bd = null;
 
         try {
-            fic = new FileInputStream(Constantes.
-                    NOM_FICHIER_BD);
 
-            // ouverture du tampon logique
+            // Ouverture du tampon logique.
             ObjectInputStream tampon = null;
             tampon = new ObjectInputStream(fic);
 
@@ -191,17 +198,20 @@ public class UtilitaireFichier {
 
         }
 
-        // Si le fichier n'existe pas, on s'assure que tout est initialis?.
+        // Si le fichier n'existe pas, on s'assure que tout est initialisé.
         catch(FileNotFoundException e){
-            bd = new BdQuestionsReponses();
-        }
-
-        // Probl?me lors de la lecture.  On ar?te.
-        catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        catch (IOException e) {
+        // Problème lors de la lecture.  On arrête.
+        catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Format de fichier invalide");
+            e.printStackTrace();
+        }
+
+
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Format de fichier invalide");
             e.printStackTrace();
         }
 
@@ -215,7 +225,7 @@ public class UtilitaireFichier {
     public static void sauvegarde(BdQuestionsReponses bd, String nomFic){
 
         /*
-         * Strat?gie : On utilise  un FileOutputStream qui permet de lire
+         * Stratégie : On utilise  un FileOutputStream qui permet de lire
          * la bd d'un coup.
          */
         FileOutputStream fic;
@@ -223,10 +233,10 @@ public class UtilitaireFichier {
 
         try {
 
-            //Cr?e le fichier
+            //Crée le fichier
             fic = new FileOutputStream(nomFic);
 
-            //Ouverture du tampon d'?criture
+            //Ouverture du tampon d'écriture
             tampon = new ObjectOutputStream(fic);
             tampon.writeObject(bd);
             tampon.close();
@@ -235,12 +245,12 @@ public class UtilitaireFichier {
 
             e1.printStackTrace();
 
-            // Une erreur de lecture, on d?truit le fichier.
+            // Une erreur de lecture, on détruit le fichier.
         } catch (IOException e) {
 
-            // On obtient le chemin du fichier pour le d?truire.
+            // On obtient le chemin du fichier pour le détruire.
             Path path =
-                    FileSystems.getDefault().getPath(Constantes.NOM_FICHIER_BD);
+                    FileSystems.getDefault().getPath(nomFic);
 
             try {
 

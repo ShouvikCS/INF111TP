@@ -17,6 +17,9 @@ public class BdQuestionsReponses implements Serializable {
         reponses = new Reponse[100];
         this.nbReponses = 0;
     }
+    public void bdName(String nomFic) {
+        this.nomFic = nomFic;
+    }
 
 
     public List<String> getQuestions() {
@@ -108,13 +111,13 @@ public class BdQuestionsReponses implements Serializable {
         }
         return false;
     }
-//    verifie si la reponse Existe et retourne la reponse (copié dans BDquestionReponse fournie par le prof)
+//    verifie si la reponse Existe et retourne la reponse (copiï¿½ dans BDquestionReponse fournie par le prof)
     public Reponse getReponse(String reponse){
         /*
-         * Stratégie : Fouille linéaire.  On récupère une Reponse à la fois et
-         * on compare l'attribut reponse à la réponse reçue.  La boucle se
-         * termine si la collection est parcourue au complet ou que la réponse
-         * a été trouvée.
+         * Stratï¿½gie : Fouille linï¿½aire.  On rï¿½cupï¿½re une Reponse ï¿½ la fois et
+         * on compare l'attribut reponse ï¿½ la rï¿½ponse reï¿½ue.  La boucle se
+         * termine si la collection est parcourue au complet ou que la rï¿½ponse
+         * a ï¿½tï¿½ trouvï¿½e.
          */
 
         int i = 0;
@@ -139,8 +142,8 @@ public class BdQuestionsReponses implements Serializable {
 
         }
 
-        // Autrement dit :: Si la taille du tableau de réponse est de 0 ou que i
-        // == taile, c'est que la réponse n'existe pas.
+        // Autrement dit :: Si la taille du tableau de rï¿½ponse est de 0 ou que i
+        // == taile, c'est que la rï¿½ponse n'existe pas.
         return r;
     }
 
@@ -166,12 +169,12 @@ public class BdQuestionsReponses implements Serializable {
     public Object getLaChaineActuelle(){
 
         /*
-         * Stratégie : On utilise l'opérateur ternaire pour retourner la bonne
-         * chaîne qui dépend si c'est une réponse ou une question.
+         * Stratï¿½gie : On utilise l'opï¿½rateur ternaire pour retourner la bonne
+         * chaï¿½ne qui dï¿½pend si c'est une rï¿½ponse ou une question.
          */
         return (reponseTrouvee())
 
-                // Si c'est l'indice d'une réponse, il faut la description.
+                // Si c'est l'indice d'une rï¿½ponse, il faut la description.
                 ? reponses[infoJeu.getCourant().getIndex()]
 
                 //Sinon, c'est l'indice d'une question.
@@ -205,10 +208,10 @@ public class BdQuestionsReponses implements Serializable {
 
         }
 
-        //Cette procédure reçoit l’indice de l’utilisateur (O ou
-        //N), déplace les références de l’attribut de type InfoJeu, ajuste l’attribut booléen
-        //selon l’indice reçu et ajoute le bon caractère à la liste des indices donnés (elle est
-        //utilisée par UtilitaireES.demarrerDivinateur).
+        //Cette procï¿½dure reï¿½oit lï¿½indice de lï¿½utilisateur (O ou
+        //N), dï¿½place les rï¿½fï¿½rences de lï¿½attribut de type InfoJeu, ajuste lï¿½attribut boolï¿½en
+        //selon lï¿½indice reï¿½u et ajoute le bon caractï¿½re ï¿½ la liste des indices donnï¿½s (elle est
+        //utilisï¿½e par UtilitaireES.demarrerDivinateur).
     }
 
 }
