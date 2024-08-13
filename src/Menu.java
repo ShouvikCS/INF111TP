@@ -29,12 +29,14 @@ public class Menu extends JMenuBar {
             public void actionPerformed(ActionEvent e) {
                 cadre.setBd(new BdQuestionsReponses());
                 UtilitaireES.demanderReponseValide(cadre.getBd());
-                JOptionPane.showMessageDialog(cadre, "Nom de la BD: ");
-                String nomFichier = UtilitaireFichier.nomFichierValide(Constantes.NOM_FICHIER_BD, UtilitaireFichier.SAUVE, "bin");
-                if (nomFichier != null) {
-                    cadre.setBdName(nomFichier);
-                    UtilitaireFichier.sauvegarde(cadre.getBd(), nomFichier);
-                    cadre.setBd(cadre.getBd());
+                if (cadre.getBd().estVide() == false) {
+                    JOptionPane.showMessageDialog(cadre, "Rentrez un nom pour la bd.");
+                    String nomFichier = UtilitaireFichier.nomFichierValide(Constantes.NOM_FICHIER_BD, UtilitaireFichier.SAUVE, "bin");
+                    if (nomFichier != null) {
+                        cadre.setBdName(nomFichier);
+                        UtilitaireFichier.sauvegarde(cadre.getBd(), nomFichier);
+                        cadre.setBd(cadre.getBd());
+                    }
                 }
             }
         });

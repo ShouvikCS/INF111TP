@@ -58,10 +58,15 @@ public class UtilitaireFichier {
         JFileChooser fc = new JFileChooser(".");
 
         //On filtre seulement les fichiers avec l'extension
-        FileNameExtensionFilter filter =
-                new FileNameExtensionFilter(filtre, extension);
+//        FileNameExtensionFilter filter =
+//                new FileNameExtensionFilter(filtre, extension);
 
-        fc.addChoosableFileFilter(filter);
+        // Au lieu d'utiliser le nom du fichier comme description pour le filtre, on utilise une description appropriee selon le cas
+        FileNameExtensionFilter filter =
+                new FileNameExtensionFilter(mode == 1 ? "Binary Files" : "Image Files", extension);
+
+//        fc.addChoosableFileFilter(filter);
+        fc.setFileFilter(filter);
 
         // On laissera la fenêtre de dialogue tant que ce ne sera pas valide.
         boolean valide = false;
@@ -157,8 +162,9 @@ public class UtilitaireFichier {
         File fic = null;
 
         // On filtre seulement les fichiers avec l'extension fournie.
+        // Comme en haut, nous utilisons une description approprie pour le filtre au lieu d'avoir le nom du fichier
         FileNameExtensionFilter filter =
-                new FileNameExtensionFilter(nomFiltre, filtre);
+                new FileNameExtensionFilter("Binary Files", filtre);
 
         fc.addChoosableFileFilter(filter);
         fc.setFileFilter(filter);

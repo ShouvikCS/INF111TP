@@ -144,6 +144,11 @@ public class UtilitaireES {
                                 UtilitaireFichier.nomFichierValide("",
                                         UtilitaireFichier.OUVRE, "jpg");
 
+                        // ne pas sauvegarder s'il n'y a pas d'image selectionnee
+                        if (nomFicImage == null) {
+                            return;
+                        }
+
                         bd.ajouterQuestionReponse(str.toString(), reponse,
                                 new ImageIcon(nomFicImage));
                     }
