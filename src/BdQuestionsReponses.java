@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 public class BdQuestionsReponses implements Serializable {
+    private static final long serialVersionUID = 2465668457521406705L;
     private  List<String> questions;
     public  Reponse [] reponses;
     private int nbReponses;
@@ -19,6 +20,9 @@ public class BdQuestionsReponses implements Serializable {
     }
     public void bdName(String nomFic) {
         this.nomFic = nomFic;
+    }
+    public String getNomFic() {
+        return nomFic;
     }
 
 
