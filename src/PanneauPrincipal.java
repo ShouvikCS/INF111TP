@@ -23,7 +23,7 @@ public class PanneauPrincipal extends JPanel {
         panneauGauche.setLayout(new GridLayout());
         ImageIcon image = new ImageIcon(getClass().getResource("Akinator.png"));
 //        Présentation du jeu
-        String presentationJeu ="<html><p>***********JEU DU DIVINATEURS*******<p>" +
+        String presentationJeu = "<html><p>***********JEU DU DIVINATEURS*******<p>" +
                 "<p>Il s'agit de penser a un animal, un objet ou un<p> " +
                 "personnage et nous tentons de le trouver <p>" +
                 "en posant des questions auxquelles <p>" +
@@ -33,7 +33,7 @@ public class PanneauPrincipal extends JPanel {
                 "votre reponse des autres.<p>" +
                 "<p>Des mauvaises questions peuvent deranger<p>" +
                 " le bon deroulement du jeu.<p>" +
-                "**************************<p>"+
+                "**************************<p>" +
                 "<html>";
         JLabel messagePresentation = new JLabel(presentationJeu, JLabel.CENTER);
         messagePresentation.setHorizontalAlignment(JLabel.CENTER);
@@ -46,20 +46,21 @@ public class PanneauPrincipal extends JPanel {
 
         panneauGauche.add(messagePresentation);
         panneauGauche.add(imageGauche);
-        panneauGauche.setLayout(new GridLayout(2,1, 5, 3));
+        panneauGauche.setLayout(new GridLayout(2, 1, 5, 3));
         this.add(panneauGauche, BorderLayout.WEST);
 
 //        Ajout des deux boutons du bas
         JPanel panneauBas = new JPanel();
         panneauBas.setLayout(new BorderLayout());
-        JButton retourButton = new JButton("<< Retour");
 
-        JButton consulterReponsesBDButton = new JButton("Consulter Réponses");
+        JButton retourButton = new JButton("<< Retour");
+        JButton consulterReponsesBDButton = new JButton("Consulter les réponses");
+
         panneauBas.add(retourButton, BorderLayout.WEST);
         panneauBas.add(consulterReponsesBDButton, BorderLayout.EAST);
         this.add(panneauBas, BorderLayout.SOUTH);
+
         retourButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 bd.retourQuestion();
                 miseAJour();
@@ -72,19 +73,20 @@ public class PanneauPrincipal extends JPanel {
             }
         });
     }
-    public void miseAJour() {
 
+    public void miseAJour() {
         this.bd = cadreDivinateur.getBd();
-        if(!bd.estVide()){
+        if (!bd.estVide()) {
             setVisible(true);
             creerPanCentral();
         }
     }
+
     public void creerPanCentral() {
-        if(this.panneauOuiNon != null){
+        if (this.panneauOuiNon != null) {
             this.remove(this.panneauOuiNon);
         }
-        if(this.bd.reponseTrouvee()){
+        if (this.bd.reponseTrouvee()) {
             this.panneauOuiNon = new PanneauReponse(this.bd, this);
         } else {
             this.panneauOuiNon = new PanneauQuestion(this.bd, this);

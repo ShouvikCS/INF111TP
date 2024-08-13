@@ -8,7 +8,6 @@ public class Noeud implements Serializable {
         this.index = index;
         this.gauche = null;
         this.droite = null;
-        //comment
     }
     public int getIndex() {
         return index;

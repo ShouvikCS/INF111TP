@@ -15,13 +15,11 @@ public class PanneauReponse extends PanneauOuiNon {
         reponseLabel.setForeground(Color.red);
         reponseLabel.setVerticalTextPosition(JLabel.TOP);
         reponseLabel.setHorizontalTextPosition(JLabel.CENTER);
-//        La position de l'image et de la reponse et ainsi que la disposition utilisé sera revu...
 
 //        Ajout du composant au panneauOuiNon
-        ajouteComposant(reponseLabel);
-//        Classe Anonyme pour les écouteurs
+
         ajouterEcouteurOui(e -> {
-            JOptionPane.showMessageDialog(null, "Bonne Reponse Trouvé!");
+            JOptionPane.showMessageDialog(null, "Bonne reponse trouvée!");
             bd.choisirPremiereQuestion();
             pp.miseAJour();
         });
@@ -31,6 +29,8 @@ public class PanneauReponse extends PanneauOuiNon {
             bd.choisirPremiereQuestion();
             pp.miseAJour();
         });
+
+        ajouteComposant(reponseLabel);
 
     }
 

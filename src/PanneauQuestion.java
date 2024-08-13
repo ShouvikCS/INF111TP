@@ -12,18 +12,20 @@ public class PanneauQuestion extends PanneauOuiNon {
         questionLabel.setAlignmentX(CENTER_ALIGNMENT); // center text in label
         questionLabel.setForeground(Color.blue);// center text in label
 
-        boutonOui.addActionListener(e -> {
+        ajouterEcouteurOui(e -> {
             bd.deplacerDansArbre(0);
             pp.miseAJour();
         });
 
-        boutonNon.addActionListener(e -> {
+        ajouterEcouteurNon(e -> {
             if (bd.deplacerDansArbre(1) == false) {
                 UtilitaireES.demanderReponseValide(bd);
                 bd.choisirPremiereQuestion();
             }
             pp.miseAJour();
         });
+
         ajouteComposant(questionLabel);
+
     }
 }

@@ -3,13 +3,15 @@ import java.awt.*;
 
 public class ConsultationReponses extends JDialog {
 
-    BdQuestionsReponses bd;
+    private BdQuestionsReponses bd;
 
     public ConsultationReponses(BdQuestionsReponses bd) {
         this.bd = bd;
         setLayout(new BorderLayout());
         JPanel layoutPanel = new JPanel();
-        JLabel title = new JLabel("Consultation Reponses");
+        JLabel title = new JLabel("Consulter les réponses existantes");
+        title.setFont(new Font("Arial", Font.BOLD, 16));
+        title.setAlignmentX(CENTER_ALIGNMENT);
         layoutPanel.setLayout(new BoxLayout(layoutPanel, BoxLayout.PAGE_AXIS));
         JPanel gridPanel = new JPanel(new GridLayout( (int) Math.ceil(bd.getNbReponses() / 2.0), 2, 15, 15));
 
@@ -23,6 +25,7 @@ public class ConsultationReponses extends JDialog {
                 gridPanel.add(reponseLabel);
             }
         }
+
         layoutPanel.add(title);
         layoutPanel.add(gridPanel);
 
@@ -34,13 +37,13 @@ public class ConsultationReponses extends JDialog {
 
         JScrollPane scrollPane = new JScrollPane(layoutPanel);
         this.add(scrollPane, BorderLayout.CENTER);
+        this.setModal(true);
+
     }
 
     public void openConsultation() {
         this.setSize(1200, 800);
         this.setLocationRelativeTo(null);
-//        this.
-
         this.setVisible(true);
     }
 

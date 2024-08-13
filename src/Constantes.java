@@ -11,6 +11,6 @@ public class Constantes {
     public static final char REPONSE_NEGATIVE = 'N';
 
     // Nom de fichier par d?faut pour retenir la bd.
-    public static final String NOM_FICHIER_BD = "bd.bin";
+    public static final String NOM_FICHIER_BD = "bd";
 
 }

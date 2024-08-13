@@ -25,21 +25,23 @@ public  class PanneauOuiNon extends JPanel{
         boutonOui = new JButton("Oui");
         boutonNon = new JButton("Non");
         sousPanneau.add(boutonOui);
-        sousPanneau.add(Box.createRigidArea(new Dimension(5, 0)));
         sousPanneau.add(boutonNon);
+
+        // Créer un contour
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2); // Black border with thickness of 2 pixels
         this.setBorder(border);
+
+        //On rajoute le sousPanneau cree a l'instance
         this.add(sousPanneau);
+        this.add(Box.createVerticalGlue()); // Espace flexible
     }
 
 
 
     public  void ajouteComposant(JLabel composant){
-//        this.remove(0);
         this.add(Box.createVerticalGlue(),0); // Espace flexible
         this.add(composant, 1);
-        this.add(Box.createVerticalGlue()); // Espace flexible
-
+        this.add(Box.createVerticalGlue(),2); // Espace flexible
         this.revalidate();
         this.repaint();
     }

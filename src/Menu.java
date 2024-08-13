@@ -5,12 +5,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import static java.io.File.*;
+
 public class Menu extends JMenuBar {
     private CadreDivinateur cadre;
+
     public Menu(CadreDivinateur cadre) {
         this.cadre = cadre;
         initialiserComposant();
     }
+
     private void initialiserComposant() {
         //        Creation du menu
         JMenuBar mb = new JMenuBar();
@@ -26,8 +30,8 @@ public class Menu extends JMenuBar {
                 cadre.setBd(new BdQuestionsReponses());
                 UtilitaireES.demanderReponseValide(cadre.getBd());
                 JOptionPane.showMessageDialog(cadre, "Nom de la BD: ");
-                String nomFichier = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.SAUVE, "bin");
-                if(nomFichier!=null){
+                String nomFichier = UtilitaireFichier.nomFichierValide(Constantes.NOM_FICHIER_BD, UtilitaireFichier.SAUVE, "bin");
+                if (nomFichier != null) {
                     cadre.setBdName(nomFichier);
                     UtilitaireFichier.sauvegarde(cadre.getBd(), nomFichier);
                     cadre.setBd(cadre.getBd());
@@ -36,31 +40,34 @@ public class Menu extends JMenuBar {
         });
         mntmOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               File fichier = UtilitaireFichier.obtenirFic("", "bin");
-               if (fichier!=null){
-                   try (FileInputStream file = new FileInputStream(fichier)) {
-                       BdQuestionsReponses bd = UtilitaireFichier.obtenirBd(file);
-                       if(bd!=null){
-                           cadre.setBd(bd);
-                           cadre.setBdName(fichier.getAbsolutePath());
-                           cadre.setBd(bd);
-                       }
-                   } catch (IOException e1){
-                       JOptionPane.showMessageDialog(null, ":" + e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-                   }
-               }
+                File fichier = UtilitaireFichier.obtenirFic("", "bin");
+                if (fichier != null) {
+                    try (FileInputStream file = new FileInputStream(fichier)) {
+                        BdQuestionsReponses bd = UtilitaireFichier.obtenirBd(file);
+                        if (bd != null) {
+                            cadre.setBd(bd);
+                            cadre.setBdName(fichier.getName());
+                            cadre.setBd(bd);
+                        }
+                    } catch (IOException e1) {
+                        JOptionPane.showMessageDialog(null, ":" + e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         });
         mntmSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 BdQuestionsReponses bd = cadre.getBd();
-                if(bd.estVide()){
+                if (bd == null) {
                     JOptionPane.showMessageDialog(cadre, "La BD doit exister !", "Bd vide", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String fileName = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.SAUVE, "bin");
+                    String temp = cadre.getBdName();
+                    if (temp.length() > 4) {
+                        temp = temp.substring(0, temp.length() - 4);
+                    }
+                    String fileName = UtilitaireFichier.nomFichierValide(temp, UtilitaireFichier.SAUVE, "bin");
 
-                    if(fileName!=null && fileName.length()>4){
-                        fileName = fileName.substring(0, fileName.length()-4);
+                    if (fileName != null) {
                         UtilitaireFichier.sauvegarde(bd, fileName);
                     }
 

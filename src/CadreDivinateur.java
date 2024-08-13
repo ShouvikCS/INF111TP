@@ -26,14 +26,17 @@ public class CadreDivinateur extends JFrame implements Runnable {
     public BdQuestionsReponses getBd(){
         return bd;
     }
+
     public void setBd(BdQuestionsReponses bd){
         this.bd = bd;
         this.bd.choisirPremiereQuestion();
         this.pp.miseAJour();
     }
+
     public void setBdName(String nom){
         this.bd.bdName(nom);
     }
+
     public String getBdName(){
         return this.bd.getNomFic();
     }

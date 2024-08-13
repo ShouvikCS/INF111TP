@@ -70,7 +70,6 @@ public class BdQuestionsReponses implements Serializable {
             listTemp.enfiler(Constantes.REPONSE_POSITIVE);
             reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler("N");
             listTemp.enfiler("O");
-            System.out.println(listTemp);
             this.reponses[this.nbReponses].setIndices(listTemp);
         } else if (this.infoJeu.isDerniereQuestionPositive() && !deplacerDansArbre(1)){
             reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler(Constantes.REPONSE_NEGATIVE);
@@ -99,22 +98,9 @@ public class BdQuestionsReponses implements Serializable {
         if (infoJeu.getPrecedent() != null){
             infoJeu = infosPrevious.getLast();
             infosPrevious.removeLast();
-            System.out.println(infoJeu.getCourant().getIndex());
         }
     }
 
-    // Verifie si la reponse existe dans tableau de reponse
-    public boolean reponseExiste(String reponse) {
-        for (int i = 0; i < this.reponses.length; i++) {
-            if (estVide()){
-                return false;
-            }
-            if (this.reponses[i] != null && this.reponses[i].getReponse().equals(reponse) ) {
-                return true;
-            }
-        }
-        return false;
-    }
 //    verifie si la reponse Existe et retourne la reponse (copi� dans BDquestionReponse fournie par le prof)
     public Reponse getReponse(String reponse){
         /*
