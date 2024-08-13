@@ -9,6 +9,7 @@ public class ConsultationReponses extends JDialog {
         this.bd = bd;
         setLayout(new BorderLayout());
         JPanel layoutPanel = new JPanel();
+        JLabel title = new JLabel("Consultation Reponses");
         layoutPanel.setLayout(new BoxLayout(layoutPanel, BoxLayout.PAGE_AXIS));
         JPanel gridPanel = new JPanel(new GridLayout( (int) Math.ceil(bd.getNbReponses() / 2.0), 2, 15, 15));
 
@@ -22,7 +23,7 @@ public class ConsultationReponses extends JDialog {
                 gridPanel.add(reponseLabel);
             }
         }
-
+        layoutPanel.add(title);
         layoutPanel.add(gridPanel);
 
         JButton closeButton = new JButton("Fermer");
