@@ -20,13 +20,13 @@ public class Menu extends JMenuBar {
         JMenuItem mntmSave = new JMenuItem("Sauver sous");
         JMenuItem mntmExit = new JMenuItem("Quitter");
 
-//        Ajout des écouteurs d'options pour les Item
+//        Ajout des ï¿½couteurs d'options pour les Item
         mntmNew.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cadre.setBd(new BdQuestionsReponses());
                 UtilitaireES.demanderReponseValide(cadre.getBd());
                 JOptionPane.showMessageDialog(cadre, "Nom de la BD: ");
-                String nomFichier = UtilitaireFichier.nomFichierValide(Constantes.NOM_FICHIER_BD, UtilitaireFichier.SAUVE, "bin");
+                String nomFichier = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.SAUVE, "bin");
                 if(nomFichier!=null){
                     cadre.setBdName(nomFichier);
                     UtilitaireFichier.sauvegarde(cadre.getBd(), nomFichier);
@@ -36,26 +36,41 @@ public class Menu extends JMenuBar {
         });
         mntmOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               File fichier = UtilitaireFichier.obtenirFic(Constantes.NOM_FICHIER_BD, "bin");
+               File fichier = UtilitaireFichier.obtenirFic("", "bin");
                if (fichier!=null){
                    try (FileInputStream file = new FileInputStream(fichier)) {
                        BdQuestionsReponses bd = UtilitaireFichier.obtenirBd(file);
                        if(bd!=null){
+                           cadre.setBd(bd);
                            cadre.setBdName(fichier.getAbsolutePath());
                            cadre.setBd(bd);
                        }
-                       else {
-                           JOptionPane.showMessageDialog(null, "Le format de fichier est invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                       }
                    } catch (IOException e1){
-                       JOptionPane.showMessageDialog(null, "Erreur lors de l'ouverture du fichier : " + e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                       JOptionPane.showMessageDialog(null, ":" + e1.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                    }
                }
             }
         });
+        mntmSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                BdQuestionsReponses bd = cadre.getBd();
+                if(bd.estVide()){
+                    JOptionPane.showMessageDialog(cadre, "La BD doit exister !", "Bd vide", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    String fileName = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.SAUVE, "bin");
+
+                    if(fileName!=null && fileName.length()>4){
+                        fileName = fileName.substring(0, fileName.length()-4);
+                        UtilitaireFichier.sauvegarde(bd, fileName);
+                    }
+
+                }
+            }
+        });
+
         mntmExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(cadre, "Merci d'Avoir joueur à notre Jeu! ", "fin", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(cadre, "Merci d'Avoir joueur ï¿½ notre Jeu! ", "Fin", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             }
         });
