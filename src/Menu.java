@@ -57,7 +57,7 @@ public class Menu extends JMenuBar {
                 if(bd.estVide()){
                     JOptionPane.showMessageDialog(cadre, "La BD doit exister !", "Bd vide", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    String fileName = UtilitaireFichier.nomFichierValide(cadre.getBdName(), UtilitaireFichier.SAUVE, "bin");
+                    String fileName = UtilitaireFichier.nomFichierValide("", UtilitaireFichier.SAUVE, "bin");
 
                     if(fileName!=null && fileName.length()>4){
                         fileName = fileName.substring(0, fileName.length()-4);

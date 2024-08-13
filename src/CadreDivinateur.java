@@ -10,18 +10,11 @@ public class CadreDivinateur extends JFrame implements Runnable {
 
     @Override
     public void run() {
-//        try {
-//            this.bd = UtilitaireFichier.obtenirBd(new FileInputStream(Constantes.NOM_FICHIER_BD));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
         this.pp = new PanneauPrincipal(this);
         this.menuBar = new Menu(this);
         setContentPane(this.pp);
         configurerFenetrePrincipale();
         setVisible(true);
-//        this.setBd(bd);
     }
 
     private void configurerFenetrePrincipale() {
