@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class BdQuestionsReponses implements Serializable {
     private static final long serialVersionUID = 2465668457521406705L;
     private  List<String> questions;
-    public  Reponse [] reponses;
+    private  Reponse [] reponses;
     private int nbReponses;
     private String nomFic = Constantes.NOM_FICHIER_BD;
-    public InfoJeu infoJeu;
-    public ArrayList<InfoJeu> infosPrevious;
+    private InfoJeu infoJeu;
+    private ArrayList<InfoJeu> infosPrevious;
 
 
     public BdQuestionsReponses() {

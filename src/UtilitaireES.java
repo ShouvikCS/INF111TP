@@ -157,12 +157,12 @@ public class UtilitaireES {
         Noeud chercheQuestion = bd.getInfoJeu().getPremier();
         boolean indiceIncorrectEstPositif = false;
 
-        for (int i = 0; i < bd.reponses.length; i++) {
-            if (bd.reponses[i] != null && bd.reponses[i].getReponse().equals(reponse) ) {
-                Liste listReponse = bd.reponses[i].getIndices();
-                int minSize = Math.min(bd.infoJeu.getIndicesCourants().taille(), listReponse.taille());
+        for (int i = 0; i < bd.getReponses().length; i++) {
+            if (bd.getReponses()[i] != null && bd.getReponses()[i].getReponse().equals(reponse) ) {
+                Liste listReponse = bd.getReponses()[i].getIndices();
+                int minSize = Math.min(bd.getInfoJeu().getIndicesCourants().taille(), listReponse.taille());
                 for (int j = 0; j < minSize; j++) {
-                    if (!bd.infoJeu.getIndicesCourants().get(j).equals(listReponse.get(j))) {
+                    if (!bd.getInfoJeu().getIndicesCourants().get(j).equals(listReponse.get(j))) {
                         for (int k = 1; k <= j ; k++) {
                             if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)){
 //                                indiceMalRepondu = true;
