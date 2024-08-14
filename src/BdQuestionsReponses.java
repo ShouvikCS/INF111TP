@@ -68,8 +68,6 @@ public class BdQuestionsReponses implements Serializable {
             this.infoJeu.getCourant().getDroite().setGauche(reps);
             Liste listTemp = new Liste(infoJeu.getIndicesCourants());
             listTemp.enfiler(Constantes.REPONSE_POSITIVE);
-            reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler("N");
-            listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
         } else if (this.infoJeu.isDerniereQuestionPositive() && !deplacerDansArbre(1)){
             reponses[infoJeu.getCourant().getIndex()].getIndices().enfiler(Constantes.REPONSE_NEGATIVE);
@@ -77,7 +75,6 @@ public class BdQuestionsReponses implements Serializable {
             this.infoJeu.getPrecedent().setGauche(ques);
             Liste listTemp = new Liste(infoJeu.getIndicesCourants());
             listTemp.enfiler(Constantes.REPONSE_POSITIVE);
-            listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
         } else {
             ques.setDroite(this.infoJeu.getCourant());
@@ -85,7 +82,6 @@ public class BdQuestionsReponses implements Serializable {
             this.infoJeu.getPrecedent().setDroite(ques);
             Liste listTemp = new Liste(infoJeu.getIndicesCourants());
             listTemp.enfiler(Constantes.REPONSE_POSITIVE);
-            listTemp.enfiler("O");
             this.reponses[this.nbReponses].setIndices(listTemp);
         }
 

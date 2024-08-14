@@ -62,14 +62,18 @@ public class PanneauPrincipal extends JPanel {
 
         retourButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                bd.retourQuestion();
-                miseAJour();
+                if (bd != null) {
+                    bd.retourQuestion();
+                    miseAJour();
+                }
             }
         });
         consulterReponsesBDButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ConsultationReponses consultationReponses = new ConsultationReponses(bd);
-                consultationReponses.openConsultation();
+                if (bd != null) {
+                    ConsultationReponses consultationReponses = new ConsultationReponses(bd);
+                    consultationReponses.openConsultation();
+                }
             }
         });
     }

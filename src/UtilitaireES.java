@@ -99,14 +99,15 @@ public class UtilitaireES {
         if(reponse != null && !reponse.equals("")){
 
             reponse = reponse.toLowerCase();
+//            boolean isReponse = bd.getLaChaineActuelle() instanceof Reponse;
 
             // S'il nous répéte ce qu'on vient de lui montrer.
-            if(!bd.estVide() && reponse.equals(bd.getLaChaineActuelle())){
-
+            if(!bd.estVide() && bd.getLaChaineActuelle() instanceof Reponse && reponse.equals(((Reponse) bd.getLaChaineActuelle()).getReponse())) {
                 JOptionPane.showMessageDialog(null,
                         "C'est ça que j'ai dit, non ????");
 
             }
+
             else{
 
                 // Si la réponse  existe,  repUtilisateur sera différent de null.
@@ -115,9 +116,7 @@ public class UtilitaireES {
                 if (repUtilisateur != null) {
 
                     // On affiche la réponse et le message qui indique l'erreur.
-                    JOptionPane.showMessageDialog(null,  repUtilisateur.getReponse() +
-                            " existe déjà dans notre banque de donnée, " +
-                            messageErreur(bd,reponse));
+                    JOptionPane.showMessageDialog(null, messageErreur(bd,reponse));
 
                 }
                 else {
@@ -168,16 +167,15 @@ public class UtilitaireES {
                 int minSize = Math.min(bd.getInfoJeu().getIndicesCourants().taille(), listReponse.taille());
                 for (int j = 0; j < minSize; j++) {
                     if (!bd.getInfoJeu().getIndicesCourants().get(j).equals(listReponse.get(j))) {
-                        for (int k = 1; k <= j ; k++) {
+                        for (int k = 0; k < j ; k++) {
                             if (listReponse.get(k).equals(Constantes.REPONSE_POSITIVE)){
-//                                indiceMalRepondu = true;
                                 chercheQuestion = chercheQuestion.getGauche();
                             } else if (listReponse.get(k).equals(Constantes.REPONSE_NEGATIVE)) { // if the indice is N, go right
                                 chercheQuestion = chercheQuestion.getDroite();
                             }
                         }
                         indiceIncorrectEstPositif = listReponse.get(j).equals(Constantes.REPONSE_POSITIVE);
-                        break; // we stop at the first difference in the list
+                        break;
                     }
                 }
             }
